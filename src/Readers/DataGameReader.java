@@ -9,6 +9,6 @@ package Readers;
  *
  * @author usuario
  */
-public class DataGameReader {
+public abstract class DataGameReader {
     
 }

@@ -9,6 +9,6 @@ package Readers;
  *
  * @author usuario
  */
-public class ReaderScore {
+public class ReaderScore extends DataGameReader {
     
 }

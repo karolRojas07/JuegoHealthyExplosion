@@ -9,6 +9,6 @@ package ElementsScenarios;
  *
  * @author usuario
  */
-public class ThiefBacterium {
+public class ThiefBacterium extends Bacterium{
     
 }

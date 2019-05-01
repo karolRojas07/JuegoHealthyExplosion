@@ -9,6 +9,6 @@ package Content_Of_Box;
  *
  * @author usuario
  */
-public class Stair {
+public class Stair extends Piece{
     
 }

@@ -9,6 +9,6 @@ package Content_Of_Box;
  *
  * @author usuario
  */
-public class Speed {
+public class Speed extends Power{
     
 }

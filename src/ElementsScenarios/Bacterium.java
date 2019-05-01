@@ -9,6 +9,6 @@ package ElementsScenarios;
  *
  * @author usuario
  */
-public class Bacterium {
+public abstract class Bacterium {
     
 }

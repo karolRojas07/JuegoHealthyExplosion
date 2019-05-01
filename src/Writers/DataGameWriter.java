@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Content_Of_Box;
+package Writers;
 
 /**
  *
  * @author usuario
  */
-public class SuperBomb extends Prize{
+public abstract class DataGameWriter {
     
 }

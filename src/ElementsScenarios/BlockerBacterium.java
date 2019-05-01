@@ -9,6 +9,7 @@ package ElementsScenarios;
  *
  * @author usuario
  */
-public class BlockerBacterium {
+public class BlockerBacterium extends Bacterium{
+    
     
 }

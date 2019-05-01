@@ -9,6 +9,6 @@ package ElementsScenarios;
  *
  * @author usuario
  */
-public class Box {
+public abstract class Box {
     
 }

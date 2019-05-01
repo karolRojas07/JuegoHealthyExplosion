@@ -9,6 +9,6 @@ package ElementsScenarios;
  *
  * @author usuario
  */
-public class Metal {
+public class Metal extends Box {
     
 }
