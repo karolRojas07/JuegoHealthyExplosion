@@ -5,18 +5,46 @@
  */
 package Views;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
 /**
  *
  * @author usuario
  */
 public class Screen extends javax.swing.JFrame {
 
+     Graphics g = this.getGraphics();
+      
+    /**
+     * 
+     */
+    public void draw (Graphics g)
+    {
+        
+//        super.paint(g);
+        for(int i = 0 ; i < 16 ; i++)
+        {
+          for(int j = 0; j < 19; j++)
+          {
+            g.setColor(Color.green);
+            g.fillRect(42*j,50*i,42,50);
+          }
+        }
+    }
+    
     /**
      * Creates new form Screen
      */
     public Screen() {
+         
+         draw(g);
         initComponents();
+       
+        
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,57 +55,59 @@ public class Screen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jtbox = new javax.swing.JLabel();
+        jtbox2 = new javax.swing.JLabel();
+        jtbox4 = new javax.swing.JLabel();
+        jtbox3 = new javax.swing.JLabel();
+        Fondo = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jtbox.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cajaMadera.jpg"))); // NOI18N
+        getContentPane().add(jtbox, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, -1, 50));
+
+        jtbox2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cajaMadera.jpg"))); // NOI18N
+        getContentPane().add(jtbox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, 50));
+
+        jtbox4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cajaMadera.jpg"))); // NOI18N
+        getContentPane().add(jtbox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 90, -1, 50));
+
+        jtbox3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/cajaMadera.jpg"))); // NOI18N
+        getContentPane().add(jtbox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, -1, 50));
+
+        Fondo.setBackground(new java.awt.Color(0, 0, 0));
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/nivel1_Estomago.png"))); // NOI18N
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 580));
+
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 790, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 580, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 580));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Screen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Screen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Screen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Screen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Screen().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Fondo;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jtbox;
+    private javax.swing.JLabel jtbox2;
+    private javax.swing.JLabel jtbox3;
+    private javax.swing.JLabel jtbox4;
     // End of variables declaration//GEN-END:variables
 }

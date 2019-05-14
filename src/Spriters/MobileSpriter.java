@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Scenarios;
+package Spriters;
 
 /**
  *
- * @author usuario
+ * @author maria
  */
-public class Stage {
-    
-    private String url;
-    
+public class MobileSpriter {
     
 }

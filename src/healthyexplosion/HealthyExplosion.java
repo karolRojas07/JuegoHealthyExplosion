@@ -5,6 +5,9 @@
  */
 package healthyexplosion;
 
+import Views.Screen;
+import java.awt.Graphics;
+
 /**
  *
  * @author usuario
@@ -16,8 +19,13 @@ public class HealthyExplosion {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+       
+        Screen screen = new Screen();
+        screen.setLocationRelativeTo(null);
+       screen.setVisible(true);
         
     }
+
+   
     
 }
