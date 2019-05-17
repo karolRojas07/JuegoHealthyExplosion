@@ -5,10 +5,15 @@
  */
 package Readers;
 
+import Controlador.Game;
+
 /**
  *
  * @author usuario
  */
-public abstract class DataGameReader {
+public interface DataGameReader {
+    
+    public void read(Game game);
+    
     
 }

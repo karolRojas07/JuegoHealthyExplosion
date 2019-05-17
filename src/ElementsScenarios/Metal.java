@@ -5,10 +5,24 @@
  */
 package ElementsScenarios;
 
+import Containers.Container;
+import java.awt.Graphics;
+
 /**
  *
  * @author usuario
  */
 public class Metal extends Box {
+
+    public Metal(int x, int y, int width, int height) {
+        super(x, y, width, height);
+    }
+
+   
+
+    @Override
+    public void draw(Graphics g) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

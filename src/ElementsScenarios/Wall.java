@@ -6,21 +6,28 @@
 package ElementsScenarios;
 
 import Containers.Container;
+import java.awt.Color;
 import java.awt.Graphics;
 
 /**
  *
- * @author usuario
+ * @author maria
  */
-public class Wood extends Box{
+public class Wall extends Box{
 
-    public Wood(int x, int y, int width, int height) {
-        super(x, y, width, height);
+    public Wall(int x, int y) {
+        super(x, y, 66, 63);
     }
-    
+
+    /**
+     * 
+     * @param g 
+     */
     @Override
     public void draw(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        g.fillRect(super.getX(),super.getY(),super.getWidth(),super.getHeight());
+        
     }
     
     

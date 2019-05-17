@@ -5,10 +5,18 @@
  */
 package Readers;
 
+import Controlador.Game;
+
 /**
  *
  * @author usuario
  */
-public class ReaderScore extends DataGameReader {
+public class ReaderScore implements DataGameReader {
+
+    @Override
+    public void read(Game game) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }

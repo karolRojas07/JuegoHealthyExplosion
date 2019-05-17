@@ -3,28 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ElementsScenarios;
+package Spriters;
 
 import Containers.Container;
-import Spriters.StaticSprite;
 
 /**
  *
- * @author usuario
+ * @author maria
  */
-public abstract class Box extends StaticSprite{
+public abstract class MobileSprite extends Sprite implements Runnable{
 
-    public Box(int x, int y, int width, int height) {
+    private Thread thread;
+
+    public MobileSprite(int x, int y, int width, int height) {
         super(x, y, width, height);
     }
-
+    
    
-
-    
-
-    
-    
-    
-    
     
 }

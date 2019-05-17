@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Spriters;
+package Containers;
+
+import java.awt.Dimension;
+import java.awt.Rectangle;
 
 /**
  *
  * @author maria
  */
-public class MobileSpriter {
+public interface Container {
+    
+    public void refresh();
+    public Rectangle getBoundaries();
     
 }
