@@ -29,6 +29,7 @@ public abstract class Sprite {
     private BufferedImage image;
     
     
+    
 
     public Sprite(int x, int y, int width, int height) {
         
@@ -167,25 +168,6 @@ public abstract class Sprite {
                  getY() + getHeight() <= bounds.getY() + bounds.getHeight());
     }
     
-//    /**
-//     * 
-//     * @param box
-//     * @return 
-//     */
-//      
-//    public boolean checkCollision(Sprite box )
-//    {
-//        if( box.y <= this.y+this.height & box.y >= this.y & box.x+box.width == this.x  
-//           & box.x+box.width < this.x+this.getWidth() &
-//           box.y+box.height <= this.y+this.getHeight() & box.y+box.height >= this.y)
-//        {
-//            System.out.println(true);
-//            return true;
-//        }
-//        
-//            return false;
-//        
-//    }
 
     /**
      * 
@@ -203,16 +185,18 @@ public abstract class Sprite {
     public boolean checkCollision(Sprite other)
     {
         // Collision x-axis?
-        boolean collisionX = this.getX() + this.getWidth() >= other.getX() &&
-            this.getX() < other.getX() + other.getWidth();
+        boolean collisionX = this.getX() + this.getWidth() >= other.getX()+5 &&
+            this.getX() <= other.getX()-10 + other.getWidth();
 
         // Collision y-axis?
-        boolean collisionY = this.getY() + this.getHeight() >= other.getY() &&
-            this.getY() < other.getY() + other.getHeight();
+        boolean collisionY = this.getY() + this.getHeight() >= other.getY()+10 &&
+            this.getY() <= other.getY()-10 + other.getHeight();
 
         // Collision only if on both axes
         return collisionX && collisionY;        
     }
+    
+    
     /**
      *  method abstract
      */

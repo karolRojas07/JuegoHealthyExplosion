@@ -16,7 +16,7 @@ import java.awt.Graphics;
 public class Wall extends Box{
 
     public Wall(int x, int y) {
-        super(x, y, 66, 63);
+        super(x, y, 42, 48);
     }
 
     /**

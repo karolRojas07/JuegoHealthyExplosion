@@ -49,6 +49,7 @@ public class GamePanel extends javax.swing.JPanel implements Container{
     public void refresh() {
         
         this.repaint();
+        
       
     }
 

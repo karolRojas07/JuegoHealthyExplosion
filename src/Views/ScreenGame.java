@@ -82,7 +82,8 @@ public class ScreenGame extends javax.swing.JFrame {
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
 
-             game.keyPressed(evt);     
+
+        game.keyPressed(evt);     
 // TODO add your handling code here:
     }//GEN-LAST:event_formKeyPressed
 

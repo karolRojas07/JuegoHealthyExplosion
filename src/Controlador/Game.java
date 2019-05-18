@@ -7,7 +7,11 @@ package Controlador;
 
 import Containers.Container;
 import ElementsScenarios.Antibiotic;
+import ElementsScenarios.Bomb;
 import ElementsScenarios.Box;
+import ElementsScenarios.Wall;
+import ElementsScenarios.Wood;
+import Readers.DataGameReader;
 import Readers.ReaderStage;
 import Scenarios.Estomach;
 import Scenarios.Stage;
@@ -29,21 +33,25 @@ import javax.swing.JLabel;
  */
 public class Game extends Sprite implements Container{
 
-    private ArrayList<Box> boxes ;
-    private ReaderStage readerStage ;
+    private DataGameReader readerStage ;
     private Stage stage;
-    private Antibiotic antibiotic;
+   
 
-    
     public Game(int x, int y, int width, int height) {
         super(x, y, width, height);
-        boxes = new ArrayList<Box>();
+      
     }
-
     
-    public void setReaderStage(ReaderStage readerStage) {
+    public void setReaderStage(DataGameReader readerStage) {
         this.readerStage = readerStage;
     }
+    
+//    
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+   
     
     /**
      * 
@@ -52,18 +60,12 @@ public class Game extends Sprite implements Container{
     @Override
     public void draw(Graphics g) {
      
+       
         g.setColor(Color.DARK_GRAY);
         g.fillRect(super.getX(), super.getY(), super.getWidth(), super.getHeight());
-        stage = new Estomach(super.getX(),super.getY(),super.getWidth(),super.getHeight(),this);
-        stage.draw(g);
+        stage.drawBox(g);
+       
         
-        boxes = readerStage.getBoxes();
-        for(Box b : boxes){
-            b.draw(g);
-        }
-        antibiotic = readerStage.getAntibiotic();
-        antibiotic.draw(g);
-        super.paint(g);
     }
 
     
@@ -73,55 +75,14 @@ public class Game extends Sprite implements Container{
      */
      public void keyPressed(KeyEvent evt) 
     {
-        // TODO
-        // System.out.println("[WORLD] Key pressed: " + evt.getKeyChar());
-
-        if(evt.getKeyCode() == KeyEvent.VK_Q)
-        {
-            System.exit(0);
-        }
         
-        ////////////////////////////////////////////////////////////////////////
-
-        if(evt.getKeyCode() == KeyEvent.VK_UP    ||
-           evt.getKeyCode() == KeyEvent.VK_DOWN  ||
-           evt.getKeyCode() == KeyEvent.VK_LEFT  ||
-           evt.getKeyCode() == KeyEvent.VK_RIGHT)
-        {
-            antibiotic.move(evt.getKeyCode());
-            checkLimitsWall() ;
-        }
+        
+         stage.keyPressed(evt);
+       
+        
     }
       
-    /**
-     * 
-     */
-    private void checkLimitsWall() {
-        
-        for(int i = 0; i < boxes.size(); i++) {
-            Box box = boxes.get(i);
-            boolean control = antibiotic.checkCollision(box);
-            
-            if(control) {
-                
-                System.out.println(" no ");
-               
-             
-                
-//                if(m instanceof MushroomBad) {
-//                    gnome.toShrink(MushroomBad.CALORIES);
-//                    container.refresh();
-//                } else 
-//                    if(m instanceof MushroomGood) {
-//                        gnome.toSwell(MushroomGood.CALORIES);
-//                        container.refresh();
-//                    } else 
-//                        System.out.println("ERROR: Mushroom type unknown.");
-            }
-        }
-      
-    }  
-
+   
      /**
       * 
       */
@@ -144,6 +105,9 @@ public class Game extends Sprite implements Container{
 
     public void mousePressed(MouseEvent evt) {
     }
+    
+    
+    
 
     
 }

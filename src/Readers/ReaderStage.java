@@ -9,6 +9,9 @@ import Controlador.Game;
 import ElementsScenarios.Antibiotic;
 import ElementsScenarios.Box;
 import ElementsScenarios.Wall;
+import ElementsScenarios.Wood;
+import Scenarios.Estomach;
+import Scenarios.Stage;
 import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -24,8 +27,10 @@ import java.util.logging.Logger;
 public class ReaderStage implements DataGameReader{
 
     private ArrayList<Box> boxes = new ArrayList<>();
+    private Stage stage ;
     private Box box;
     private Antibiotic antibiotic;
+    private int[][] tableGame = new int[19][14];
 
     public ArrayList<Box> getBoxes() {
         return boxes;
@@ -37,6 +42,7 @@ public class ReaderStage implements DataGameReader{
     
     /**
      * 
+     * 
      * @param game 
      */
     @Override
@@ -47,31 +53,31 @@ public class ReaderStage implements DataGameReader{
              RandomAccessFile reader = new RandomAccessFile("StomachScenario.txt", "r");
              String line =  null;
              int column = 0;
-             while ( (line = reader.readLine() )!= null )
+             while ( (line = reader.readLine() ) != null )
              {
                  
                  column +=1;
                  String[] parts = line.split(" ");
-                
-                 for(int file = 0;  file< parts.length ; file++ )
+               
+                 if( column == 1)
                  {
-                     
-                     if (parts[file].contentEquals("1"))
+                     if(parts[0].contains("E"))
                      {
-                         box = new Wall(file*42, column*50);
-                         box.setContainer(game);
-                         box.setColor(Color.DARK_GRAY);
-                         boxes.add(box);
-                     }
-                     else if(parts[file].contentEquals("3"))
-                     {
-                        antibiotic = new Antibiotic(file*42,column*50);
-                        antibiotic.setContainer(game);
-                         
+                         stage = new Estomach(0,0,game);
+                         game.setStage(stage);
                      }
                  }
-                 
+                 else if (column < tableGame[0].length)
+                 {
+                    for(int file = 0;  file< parts.length ; file++ )
+                    {  
+                       tableGame[file][column-2] = Integer.parseInt(parts[file]); 
+                       
+                    } 
+                 }   
              }
+              stage.setTableGame(tableGame);
+              stage.fixElements();
              reader.close();
             
         } catch (FileNotFoundException ex) {

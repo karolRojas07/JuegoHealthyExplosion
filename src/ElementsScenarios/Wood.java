@@ -7,6 +7,7 @@ package ElementsScenarios;
 
 import Containers.Container;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -14,13 +15,17 @@ import java.awt.Graphics;
  */
 public class Wood extends Box{
 
-    public Wood(int x, int y, int width, int height) {
-        super(x, y, width, height);
+    public Wood(int x, int y) {
+        super(x, y, 42, 48);
+        BufferedImage image =super.setImage("src/Images/cajaMadera.jpg");
+        super.setImage(image); 
     }
     
     @Override
     public void draw(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        super.paint(g);
+        
     }
     
     

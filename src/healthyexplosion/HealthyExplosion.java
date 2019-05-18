@@ -6,8 +6,10 @@
 package healthyexplosion;
 
 import Controlador.Game;
+import Readers.DataGameReader;
 import Readers.ReaderStage;
 import Views.ScreenGame;
+import java.awt.Color;
 import java.awt.Graphics;
 import static javax.swing.Spring.height;
 
@@ -23,11 +25,11 @@ public class HealthyExplosion {
     public static void main(String[] args) {
         // TODO code application logic here
        
-       Game game = new Game (0, 0,800, 800);
+       Game game = new Game (0, 0,800,800);
        ScreenGame screen = new ScreenGame(game);
        screen.setSize(800, 800); 
        screen.pack();
-       ReaderStage reader = new ReaderStage();
+       DataGameReader reader = new ReaderStage();
        reader.read(game);
        game.setReaderStage(reader);
        screen.open();

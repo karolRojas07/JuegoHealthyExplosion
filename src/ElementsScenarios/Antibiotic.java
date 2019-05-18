@@ -6,10 +6,12 @@
 package ElementsScenarios;
 
 import Containers.Container;
+import Spriters.Sprite;
 import Spriters.StaticSprite;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,56 +20,79 @@ import java.awt.image.BufferedImage;
 public class Antibiotic extends StaticSprite{
 
     public static final int STEP = 8;
+    private boolean validateBox = false;
+    private Bomb bomb;
+    private ArrayList<Bomb> bombs ;
 
     public Antibiotic(int x, int y) {
-        super(x, y, 67, 63);
+        super(x, y, 53, 50);
         BufferedImage image =super.setImage("src/Images/personajePrincipal.png");
         super.setImage(image); 
+        bombs = new ArrayList<>();
+    }
+
+    public boolean isValidateBox() {
+        return validateBox;
+    }
+
+    public void setValidateBox(boolean validateBox) {
+        this.validateBox = validateBox;
     }
     
-   
     /**
      * 
      * @param g 
      */
     @Override
     public void draw(Graphics g) {
-         
-        super.paint(g);
         
+         for(Bomb bomb : bombs)
+        {
+            System.out.println("entro");
+           bomb.draw(g);
+           bomb.getContainer().refresh();
+        }
+        super.paint(g);
+       
+    }
+    /**
+     * 
+     * @param g 
+     */
+    public void drawBomb(Graphics g)
+    {
+       
+        for(Bomb bomb : bombs)
+        {
+            System.out.println("entro");
+           bomb.draw(g);
+           bomb.getContainer().refresh();
+        }
+       
     }
     
     /**
      * 
-     * @param key 
+     * @param direction
+     * @param other 
      */
-      public void keyPressed(int key)
-    {
-        
-        if(key == KeyEvent.VK_UP |
-           key == KeyEvent.VK_DOWN |
-           key == KeyEvent.VK_LEFT |
-           key == KeyEvent.VK_RIGHT)
-            move(key);
-    }
-    
-      /**
-       * 
-       * @param direction 
-       */
-    public void move(int direction)
+    public void move(int direction, Sprite other)
     {
         int nx = getX();
         int ny = getY();
         
+        
         switch(direction)
         {
+            
             case KeyEvent.VK_UP:
                 setY(getY() - STEP);
             break;
             case KeyEvent.VK_DOWN:
-                setY(getY() + STEP);
-            break;
+            {
+                System.out.println("abajo");
+               setY(getY() + STEP);
+            }break;
             case KeyEvent.VK_LEFT:
                 setX(getX() - STEP);
             break;
@@ -80,15 +105,50 @@ public class Antibiotic extends StaticSprite{
             break;
         }
         
+         if(this.checkCollision(other))
+        {
+            System.out.println(" caja "+isValidateBox());  
+            setX(nx);
+            setY(ny);
+             
+            
+     
+        }
         if(isOutOfGameSection())
         {
             setX(nx);
             setY(ny);
+           
         }
-        
         else
-            super.getContainer().refresh();
+        {
+            //super.updateGameSection();
+          super.getContainer().refresh();
+        }
     }
+        /**
+         * 
+         */
+        public void createBomb(Container container)
+        {
+            bomb = new Bomb(this.getX() ,this.getY()-this.getHeight(),container );
+            bombs.add(bomb);
+            
+        }
+        public void deleteBomb()
+        {
+            bombs.remove(bomb);
+        }
+
+    public Bomb getBomb() {
+        return bomb;
+    }
+
+    public ArrayList<Bomb> getBombs() {
+        return bombs;
+    }
+    
+    
     
     
     
