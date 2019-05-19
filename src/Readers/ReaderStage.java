@@ -30,7 +30,7 @@ public class ReaderStage implements DataGameReader{
     private Stage stage ;
     private Box box;
     private Antibiotic antibiotic;
-    private int[][] tableGame = new int[19][14];
+    private int[][] tableGame = new int[19][16];
 
     public ArrayList<Box> getBoxes() {
         return boxes;
@@ -65,6 +65,7 @@ public class ReaderStage implements DataGameReader{
                      {
                          stage = new Estomach(0,0,game);
                          game.setStage(stage);
+                      
                      }
                  }
                  else if (column < tableGame[0].length)

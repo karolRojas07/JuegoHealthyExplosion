@@ -25,9 +25,9 @@ public class HealthyExplosion {
     public static void main(String[] args) {
         // TODO code application logic here
        
-       Game game = new Game (0, 0,800,800);
+       Game game = new Game (0, 0,800,700);
        ScreenGame screen = new ScreenGame(game);
-       screen.setSize(800, 800); 
+       screen.setSize(800, 700); 
        screen.pack();
        DataGameReader reader = new ReaderStage();
        reader.read(game);

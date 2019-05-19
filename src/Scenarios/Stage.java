@@ -7,6 +7,8 @@ package Scenarios;
 
 import Containers.Container;
 import ElementsScenarios.Antibiotic;
+import ElementsScenarios.Bacterium;
+import ElementsScenarios.BlockerBacterium;
 import ElementsScenarios.Bomb;
 import ElementsScenarios.Box;
 import ElementsScenarios.Wall;
@@ -17,15 +19,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
  * @author usuario
  */
 public abstract class Stage extends StaticSprite implements Container{
-    
-    
-    
     
     private String url;
 
@@ -36,6 +38,8 @@ public abstract class Stage extends StaticSprite implements Container{
     private Box box;
     
     private ArrayList<Box > boxes ;
+    
+    private Bacterium bacterium; 
 
     
     public int[][] getTableGame() {
@@ -50,6 +54,7 @@ public abstract class Stage extends StaticSprite implements Container{
     
     public Stage(int x, int y, int width, int height, Container container) {
         super(x, y, width, height, container);
+        
         boxes = new ArrayList<>();
        
     }
@@ -129,15 +134,16 @@ public abstract class Stage extends StaticSprite implements Container{
             if(b instanceof Wall)
             {
             b.draw(g);}
-        }
-        
-        this.draw(g);
-        
+        }   
+            this.draw(g);
+            
           for(Box b : boxes){
             if(b instanceof Wood){
             b.draw(g);}
         }
          antibiotic.draw(g);
+         bacterium = new BlockerBacterium(3*50,13*42,this);
+         bacterium.draw(g);
     }
    
     /**
@@ -154,9 +160,10 @@ public abstract class Stage extends StaticSprite implements Container{
         {
             antibiotic.createBomb(this.getContainer()); 
              antibiotic.getContainer().refresh();
-              exploit();
-            
-               
+            scheduleDelayTask1(1);
+              antibiotic.getContainer().refresh();
+           
+             
         }
     
         ////////////////////////////////////////////////////////////////////////
@@ -167,27 +174,46 @@ public abstract class Stage extends StaticSprite implements Container{
            evt.getKeyCode() == KeyEvent.VK_RIGHT)
         {
           
-            Sprite other=  checkLimitsWall() ;
+            Sprite other=  checkLimitsBox() ;
             antibiotic.move(evt.getKeyCode(),other);
-            
-            
+             antibiotic.getContainer().refresh();
         }
     }
-     private void exploit()
-     {
-     long startTime = System.currentTimeMillis();
-             System.out.println("tiempo ");  
-            antibiotic.deleteBomb();
-            
-           long estimatedTime = System.currentTimeMillis() - 100;}
+     
+     /**
+      * mide el tiempo de la bomba en explotar
+      */
+      public  void scheduleDelayTask1(int option)
+   {
+        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+        Runnable task1 = null;
+   
+        
+          task1 = () -> antibiotic.deleteBomb();
+           service.scheduleAtFixedRate(task1,5,1, TimeUnit.SECONDS);
+      
+       
+    //scheduleWithFixedDelay es aconsejable usarlo cuando no importa que se siga un patron de tiempo, distinto a scheduleFixedRate que se ejecuta cronologicamente siempre
+   }
+      
+      public void timeBox(Box box)
+      {
+         ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+         Runnable task1 = null;
+         task1 = () -> boxes.remove(box);
+         service.scheduleAtFixedRate(task1,4,1, TimeUnit.SECONDS);
+         box.getContainer().refresh();
+         
+      }
+      
+     
       /**
      * 
      * @param g 
      */
     @Override
-    public void draw(Graphics g) {  
-        
-    
+    public void draw(Graphics g) { 
+       
         super.paint(g);
         
         
@@ -201,32 +227,51 @@ public abstract class Stage extends StaticSprite implements Container{
       /**
      * 
      */
-    public Sprite checkLimitsWall() {
+    public Sprite checkLimitsBox() {
         
          
         for(int i = 0; i < boxes.size(); i++) {
             box = boxes.get(i);
            boolean control = antibiotic.checkCollision(box);
-           
+           boolean estado  = exploitBox( box);
+        
             
             if(control) {
                 
                   return box;
-                // antibiotic.setValidateBox(control);
-           
-//                if(m instanceof MushroomBad) {
-//                    gnome.toShrink(MushroomBad.CALORIES);
-//                    container.refresh();
-//                } else 
-//                    if(m instanceof MushroomGood) {
-//                        gnome.toSwell(MushroomGood.CALORIES);
-//                        container.refresh();
-//                    } else 
-//                        System.out.println("ERROR: Mushroom type unknown.");
+            }
+            if(estado)
+            {
+              tableGame[box.getX()/42][box.getY()/50]=0;
+              timeBox( box);     
             }
         }
        
         return box;
+      
+    }  
+    
+    /**
+     * 
+     * @return 
+     */
+    private boolean exploitBox(Box box) {
+        
+        boolean estado = false;
+        for(int i = 0; i < antibiotic.getBombs().size(); i++) {
+            
+           antibiotic.setBomb( antibiotic.getBombs().get(i));
+           estado = antibiotic.getBomb().checkCollision(box);
+           
+           if(estado)
+           {
+               return estado;
+           }
+          
+        }
+        return estado;
+       
+      
       
     }  
     

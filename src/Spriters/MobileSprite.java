@@ -15,10 +15,15 @@ public abstract class MobileSprite extends Sprite implements Runnable{
 
     private Thread thread;
 
-    public MobileSprite(int x, int y, int width, int height) {
-        super(x, y, width, height);
+    public MobileSprite(int x, int y, int width, int height, Container container) {
+        super(x, y, width, height, container);
+         thread = new Thread(this);
+    }
+
+    public Thread getThread() {
+        return thread;
     }
     
-   
+    public abstract void run();
     
 }

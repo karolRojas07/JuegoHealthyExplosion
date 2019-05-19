@@ -63,8 +63,9 @@ public class Game extends Sprite implements Container{
        
         g.setColor(Color.DARK_GRAY);
         g.fillRect(super.getX(), super.getY(), super.getWidth(), super.getHeight());
+        
         stage.drawBox(g);
-       
+     
         
     }
 

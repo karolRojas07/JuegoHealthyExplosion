@@ -74,6 +74,7 @@ public class GamePanel extends javax.swing.JPanel implements Container{
      * Creates new form GamePanel
      */
     public GamePanel() {
+      
         initComponents();
     }
 

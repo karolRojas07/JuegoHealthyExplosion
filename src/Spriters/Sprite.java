@@ -37,7 +37,8 @@ public abstract class Sprite {
         setY(y);
         setWidth(width);
         setHeight(height);
-      // setColor(new Color((int)(Math.random()*256), 
+        
+//       setColor(new Color((int)(Math.random()*256), 
 //                           (int)(Math.random()*256), 
 //                           (int)(Math.random()*256)));
         setContainer(null);

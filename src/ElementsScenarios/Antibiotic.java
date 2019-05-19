@@ -38,6 +38,10 @@ public class Antibiotic extends StaticSprite{
     public void setValidateBox(boolean validateBox) {
         this.validateBox = validateBox;
     }
+
+    public void setBomb(Bomb bomb) {
+        this.bomb = bomb;
+    }
     
     /**
      * 
@@ -48,7 +52,7 @@ public class Antibiotic extends StaticSprite{
         
          for(Bomb bomb : bombs)
         {
-            System.out.println("entro");
+           
            bomb.draw(g);
            bomb.getContainer().refresh();
         }
@@ -64,7 +68,7 @@ public class Antibiotic extends StaticSprite{
        
         for(Bomb bomb : bombs)
         {
-            System.out.println("entro");
+           
            bomb.draw(g);
            bomb.getContainer().refresh();
         }
@@ -131,13 +135,16 @@ public class Antibiotic extends StaticSprite{
          */
         public void createBomb(Container container)
         {
-            bomb = new Bomb(this.getX() ,this.getY()-this.getHeight(),container );
+            bomb = new Bomb(this.getX() ,this.getY()-this.getHeight()+10,container );
             bombs.add(bomb);
             
         }
         public void deleteBomb()
         {
-            bombs.remove(bomb);
+            for(Bomb bomb : bombs)
+            {
+               bombs.remove(bomb);
+            }
         }
 
     public Bomb getBomb() {
@@ -145,6 +152,7 @@ public class Antibiotic extends StaticSprite{
     }
 
     public ArrayList<Bomb> getBombs() {
+        
         return bombs;
     }
     
