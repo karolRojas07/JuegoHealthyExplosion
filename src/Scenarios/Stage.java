@@ -56,7 +56,7 @@ public abstract class Stage extends StaticSprite implements Container{
         super(x, y, width, height, container);
         
         boxes = new ArrayList<>();
-       
+       bacterium = new BlockerBacterium(3*50,12*42,this);
     }
 
     public String getUrl() {
@@ -115,6 +115,7 @@ public abstract class Stage extends StaticSprite implements Container{
                            antibiotic.setContainer(this);
                            
                         }
+                        bacterium.setBoxes(boxes);
                 
             }
             
@@ -129,21 +130,23 @@ public abstract class Stage extends StaticSprite implements Container{
      */
     public void drawBox(Graphics g) {  
         
-        
+     
         for(Box b : boxes){
             if(b instanceof Wall)
             {
             b.draw(g);}
         }   
-            this.draw(g);
+               this.draw(g);
             
           for(Box b : boxes){
             if(b instanceof Wood){
             b.draw(g);}
         }
          antibiotic.draw(g);
-         bacterium = new BlockerBacterium(3*50,13*42,this);
+         
          bacterium.draw(g);
+      
+       
     }
    
     /**
@@ -176,7 +179,8 @@ public abstract class Stage extends StaticSprite implements Container{
           
             Sprite other=  checkLimitsBox() ;
             antibiotic.move(evt.getKeyCode(),other);
-             antibiotic.getContainer().refresh();
+            antibiotic.getContainer().refresh();
+            
         }
     }
      
@@ -232,13 +236,18 @@ public abstract class Stage extends StaticSprite implements Container{
          
         for(int i = 0; i < boxes.size(); i++) {
             box = boxes.get(i);
-           boolean control = antibiotic.checkCollision(box);
-           boolean estado  = exploitBox( box);
+            boolean controlAntibiotic  = antibiotic.checkCollision(box);
+            boolean controlBacterium  = antibiotic.checkCollision(bacterium);
+            boolean estado  = exploitBox( box);
         
             
-            if(control) {
+            if(controlAntibiotic) {
                 
                   return box;
+            }
+            else if( controlBacterium ) {
+                
+                  return bacterium;
             }
             if(estado)
             {

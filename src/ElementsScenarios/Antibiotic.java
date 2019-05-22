@@ -111,7 +111,7 @@ public class Antibiotic extends StaticSprite{
         
          if(this.checkCollision(other))
         {
-            System.out.println(" caja "+isValidateBox());  
+           
             setX(nx);
             setY(ny);
              
@@ -126,7 +126,7 @@ public class Antibiotic extends StaticSprite{
         }
         else
         {
-            //super.updateGameSection();
+            
           super.getContainer().refresh();
         }
     }

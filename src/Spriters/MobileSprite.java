@@ -11,7 +11,7 @@ import Containers.Container;
  *
  * @author maria
  */
-public abstract class MobileSprite extends Sprite implements Runnable{
+public abstract class MobileSprite extends Sprite implements Runnable {
 
     private Thread thread;
 
@@ -25,5 +25,11 @@ public abstract class MobileSprite extends Sprite implements Runnable{
     }
     
     public abstract void run();
+
+    public void setThread(Thread thread) {
+        this.thread = thread;
+    }
+    
+    
     
 }

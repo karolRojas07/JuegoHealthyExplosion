@@ -6,6 +6,7 @@
 package ElementsScenarios;
 
 import Containers.Container;
+import Spriters.Sprite;
 import java.awt.Graphics;
 
 /**
@@ -27,5 +28,16 @@ public class ThiefBacterium extends Bacterium{
     public void run() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void move() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+
+
+   
+
+   
     
 }

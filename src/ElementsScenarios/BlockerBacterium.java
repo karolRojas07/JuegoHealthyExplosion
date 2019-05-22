@@ -6,6 +6,7 @@
 package ElementsScenarios;
 
 import Containers.Container;
+import Spriters.Sprite;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
@@ -17,13 +18,65 @@ import java.util.logging.Logger;
  */
 public class BlockerBacterium extends Bacterium {
 
+   
+    
+    
+    
     public BlockerBacterium(int x, int y, Container container) {
         super("src/Images/constructoraBacterium.png", x, y,51,50, container);
          BufferedImage image = super.setImage(super.getUrl());
          super.setImage(image);
-          super.getThread().start();
+         this.getThread().start();
+        
     }
-
+    
+    
+    @Override
+    public void move()
+    {
+//        
+        int step = 7;
+        for (int i = 0; i < step; i++) { 
+            
+            Sprite sprite = this.checkLimitsSprite();
+            this.setX(this.getX() +step);
+            if(this.isOutOfGameSection())
+            {
+                this.setX(this.getX());
+            }
+            if(this.checkCollision(sprite))
+            {
+                  this.setX(this.getX());
+            }
+            this.getContainer().refresh();
+            
+        }
+    }
+    /**
+     * 
+     */
+    @Override
+    public void run() {
+        
+        
+         while(true)
+        {
+            //this.setX(this.getX()+10);
+            
+            //super.getContainer().refresh();
+            //this.getContainer().refresh();
+            
+            try {
+                Thread.sleep(200);
+                 move();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Bacterium.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+        }
+        
+    }
+    
    
 
     /**
@@ -36,25 +89,11 @@ public class BlockerBacterium extends Bacterium {
         super.paint(g);
     }
 
-    /**
-     * 
-     */
-    @Override
-    public void run() {
-        
-         while(true)
-        {
-            super.setX(super.getX()+5);
-            super.getContainer().refresh();
-            
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(BlockerBacterium.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        
-    }
+   
+
+   
+
+    
     
     
 }
