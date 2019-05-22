@@ -6,7 +6,7 @@
 package ElementsScenarios;
 
 import Containers.Container;
-import Spriters.MobileSprite;
+import Spriters.MovableSprite;
 import Spriters.Sprite;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -17,9 +17,11 @@ import java.util.logging.Logger;
  *
  * @author usuario
  */
-public abstract class Bacterium extends MobileSprite{
+public abstract class Bacterium extends MovableSprite{
     
     private ArrayList<Box > boxes ;
+    private int[][] tableGame;
+    private Sprite sprite; 
     private String url ;
 
     public ArrayList<Box> getBoxes() {
@@ -29,9 +31,23 @@ public abstract class Bacterium extends MobileSprite{
     public void setBoxes(ArrayList<Box> boxes) {
         this.boxes = boxes;
     }
-    
-    
 
+    public Sprite getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(Sprite sprite) {
+        this.sprite = sprite;
+    }
+
+    public int[][] getTableGame() {
+        return tableGame;
+    }
+
+    public void setTableGame(int[][] tableGame) {
+        this.tableGame = tableGame;
+    }
+    
     public Bacterium(String url, int x, int y, int width, int height,Container container) {
         super(x, y, width, height,container);
         this.url = url;
@@ -52,9 +68,14 @@ public abstract class Bacterium extends MobileSprite{
      {
          box = boxes.get(i);
          boolean control =this.checkCollision(box);
+         boolean controlSprite = this.checkCollision(sprite);
          if(control)
          {
-             return box;
+            return box;
+         }
+         else if(controlSprite)
+         {
+             return sprite;
          }
          
      }

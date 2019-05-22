@@ -94,8 +94,7 @@ public class Antibiotic extends StaticSprite{
             break;
             case KeyEvent.VK_DOWN:
             {
-                System.out.println("abajo");
-               setY(getY() + STEP);
+                setY(getY() + STEP);
             }break;
             case KeyEvent.VK_LEFT:
                 setX(getX() - STEP);

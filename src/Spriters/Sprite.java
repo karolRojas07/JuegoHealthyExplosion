@@ -20,17 +20,43 @@ import javax.imageio.ImageIO;
  */
 public abstract class Sprite {
     
+    /**
+     * posicion en el eje horizontal del objeto
+     */
     private int x;
+    /**
+     * posicion en el vertical del objeto
+     */
     private int y;
+    /**
+     * el ancho del objeto
+     */
     private int width;
+    /**
+     *  el alto del objeto
+     */
     private int height;
+    /**
+     * color del objeto 
+     */
     private Color color;
+    /**
+     * la clase que lo contiene para pintarlo
+     */
     private Container container;
+    /**
+     * la imagen del objeto
+     */
     private BufferedImage image;
     
     
-    
-
+    /**
+     * constructor
+     * @param x
+     * @param y
+     * @param width
+     * @param height 
+     */
     public Sprite(int x, int y, int width, int height) {
         
         setX(x);
@@ -41,77 +67,141 @@ public abstract class Sprite {
 //       setColor(new Color((int)(Math.random()*256), 
 //                           (int)(Math.random()*256), 
 //                           (int)(Math.random()*256)));
-        setContainer(null);
+       // setContainer(null);
      
         
     }
 
+    /**
+     * constructor
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     * @param container 
+     */
      public Sprite(int x, int y, int width, int height, Container container)
     {
         this(x, y, width, height);
         setContainer(container);
     }
     
-     
+    
+     /**
+      * el obtener la pocicion horizontal
+      * @return 
+      */
     public int getX() {
         return x;
     }
 
+    /**
+     * el guardar la variable horizonta por el parametro de entrada
+     * @param x 
+     */
     public void setX(int x) {
         this.x = x;
     }
 
+    /**
+     * el obtener la variable vertical 
+     * @return 
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * el guardar por de la variable vertical por el parametro de entrada
+     * @param y 
+     */
     public void setY(int y) {
         this.y = y;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * 
+     * @param width 
+     */
     public void setWidth(int width) {
         this.width = width;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * 
+     * @param height 
+     */
     public void setHeight(int height) {
         this.height = height;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public Container getContainer() {
         return container;
     }
 
+    /**
+     * 
+     * @param container 
+     */
     public void setContainer(Container container) {
         this.container = container;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public BufferedImage getImage() {
         return image;
     }
 
+    /**
+     * 
+     * @param image 
+     */
     public void setImage(BufferedImage image) {
         this.image = image;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public Color getColor() {
         return color;
     }
 
+    /**
+     * 
+     * @param color 
+     */
     public void setColor(Color color) {
         this.color = color;
     }
     
 
     /**
-     * 
+     * el dibuja las imagenes o las figuras.
      * @param g 
      */
      public void paint(Graphics g)
@@ -132,7 +222,7 @@ public abstract class Sprite {
      
      
      /**
-      * 
+      *  crea la imagen
       * @param filename
       * @return 
       */
@@ -153,7 +243,7 @@ public abstract class Sprite {
     }
     
       /**
-       * 
+       * revisa si esta en los limites del juego.
        * @return 
        */
       public boolean isOutOfGameSection()
@@ -170,16 +260,16 @@ public abstract class Sprite {
     }
     
 
+//    /**
+//     * 
+//     */
+//    public void updateGameSection()
+//    {
+//        if(getContainer() != null)
+//            getContainer().refresh();
+//    }
     /**
-     * 
-     */
-    public void updateGameSection()
-    {
-        if(getContainer() != null)
-            getContainer().refresh();
-    }
-    /**
-     * 
+     * revisa  toca otro objeto sprite
      * @param other
      * @return 
      */
@@ -192,14 +282,16 @@ public abstract class Sprite {
         // Collision y-axis?
         boolean collisionY = this.getY() + this.getHeight() >= other.getY()+10 &&
             this.getY() <= other.getY()-10 + other.getHeight();
-
+ 
+        System.out.println("colisiono");
+        
         // Collision only if on both axes
         return collisionX && collisionY;        
     }
     
     
     /**
-     *  method abstract
+     *  method abstract dibuja las imagenes
      */
     public abstract void draw(Graphics g);
     

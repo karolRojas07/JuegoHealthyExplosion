@@ -11,11 +11,12 @@ import Containers.Container;
  *
  * @author maria
  */
-public abstract class MobileSprite extends Sprite implements Runnable {
+public abstract class MovableSprite extends Sprite implements Runnable {
 
     private Thread thread;
+    
 
-    public MobileSprite(int x, int y, int width, int height, Container container) {
+    public MovableSprite(int x, int y, int width, int height, Container container) {
         super(x, y, width, height, container);
          thread = new Thread(this);
     }

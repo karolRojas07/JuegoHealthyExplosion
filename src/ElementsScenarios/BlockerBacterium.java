@@ -34,8 +34,9 @@ public class BlockerBacterium extends Bacterium {
     @Override
     public void move()
     {
-//        
-        int step = 7;
+        int nX = this.getX();
+        int nY = this.getY();
+        int step = 3;
         for (int i = 0; i < step; i++) { 
             
             Sprite sprite = this.checkLimitsSprite();
@@ -46,7 +47,7 @@ public class BlockerBacterium extends Bacterium {
             }
             if(this.checkCollision(sprite))
             {
-                  this.setX(this.getX());
+                  this.setX(nX);
             }
             this.getContainer().refresh();
             

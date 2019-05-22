@@ -111,15 +111,18 @@ public abstract class Stage extends StaticSprite implements Container{
                         else if(tableGame[file][column] == 3)
                         {
                            antibiotic = new Antibiotic(file*42,column*50);
+                           bacterium.setSprite(antibiotic);
                            antibiotic.setColor(null);
                            antibiotic.setContainer(this);
                            
                         }
-                        bacterium.setBoxes(boxes);
+                   
                 
             }
             
         }
+             bacterium.setBoxes(boxes);
+             bacterium.setTableGame(tableGame);
          
     }
     
