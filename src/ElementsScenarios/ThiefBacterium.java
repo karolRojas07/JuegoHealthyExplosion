@@ -15,9 +15,11 @@ import java.awt.Graphics;
  */
 public class ThiefBacterium extends Bacterium{
 
-    public ThiefBacterium(String url, int x, int y, int width, int height,Container container) {
-        super(url, x, y, width, height, container);
+    public ThiefBacterium(String url, int x, int y, int width, int height, Container container, int xSide, int ySide) {
+        super(url, x, y, width, height, container, xSide, ySide);
     }
+
+    
 
     @Override
     public void draw(Graphics g) {
@@ -34,7 +36,7 @@ public class ThiefBacterium extends Bacterium{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
+  
 
    
 

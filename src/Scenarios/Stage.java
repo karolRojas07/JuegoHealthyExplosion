@@ -40,6 +40,8 @@ public abstract class Stage extends StaticSprite implements Container{
     private ArrayList<Box > boxes ;
     
     private Bacterium bacterium; 
+    
+    private ArrayList<Bacterium> bacteriums ;
 
     
     public int[][] getTableGame() {
@@ -56,7 +58,8 @@ public abstract class Stage extends StaticSprite implements Container{
         super(x, y, width, height, container);
         
         boxes = new ArrayList<>();
-       bacterium = new BlockerBacterium(3*50,12*42,this);
+        bacteriums = new ArrayList<>();
+       
     }
 
     public String getUrl() {
@@ -111,7 +114,7 @@ public abstract class Stage extends StaticSprite implements Container{
                         else if(tableGame[file][column] == 3)
                         {
                            antibiotic = new Antibiotic(file*42,column*50);
-                           bacterium.setSprite(antibiotic);
+                         
                            antibiotic.setColor(null);
                            antibiotic.setContainer(this);
                            
@@ -121,9 +124,9 @@ public abstract class Stage extends StaticSprite implements Container{
             }
             
         }
-             bacterium.setBoxes(boxes);
-             bacterium.setTableGame(tableGame);
-         
+        creatBacterium();
+        creatBacteriumTime(); 
+  
     }
     
     
@@ -147,11 +150,32 @@ public abstract class Stage extends StaticSprite implements Container{
         }
          antibiotic.draw(g);
          
-         bacterium.draw(g);
-      
+         if(bacteriums != null){
+            for(Bacterium b : bacteriums){
+            b.draw(g);
+           
+        }
+         }
+          
+        
        
     }
-   
+    /**
+     * 
+     */
+    private void addBoxBacterium()
+    {  
+ 
+        if(bacterium.isIndicator() == false)
+        {
+           int nX = bacterium.getX();
+           int nY = bacterium.getY();
+           box = new Wood(nX-box.getWidth(),nY);
+           box.setContainer(this);
+           boxes.add(box);
+           
+        } 
+    }
     /**
      * 
      * @param evt 
@@ -165,9 +189,9 @@ public abstract class Stage extends StaticSprite implements Container{
         if(evt.getKeyCode() == KeyEvent.VK_B)
         {
             antibiotic.createBomb(this.getContainer()); 
-             antibiotic.getContainer().refresh();
-            scheduleDelayTask1(1);
-              antibiotic.getContainer().refresh();
+            antibiotic.getContainer().refresh();
+            scheduleDelayTask1();
+            antibiotic.getContainer().refresh();
            
              
         }
@@ -181,35 +205,102 @@ public abstract class Stage extends StaticSprite implements Container{
         {
           
             Sprite other=  checkLimitsBox() ;
+            checkLimitsBacterium();
             antibiotic.move(evt.getKeyCode(),other);
-            antibiotic.getContainer().refresh();
+//          
             
         }
     }
+       /**
+      * mide el tiempo de crear  cajas la bacteria
+      */
+      public  void addBoxBacteriumTime()
+   {
+        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+        Runnable task1 = null;
+        task1 = () -> this.addBoxBacterium();
+        service.scheduleAtFixedRate(task1,5,5, TimeUnit.SECONDS);
+      
+       
+    //scheduleWithFixedDelay es aconsejable usarlo cuando no importa que se siga un patron de tiempo, distinto a scheduleFixedRate que se ejecuta cronologicamente siempre
+   }
+      /**
+      * mide el tiempo de crear  cajas la bacteria
+      */
+      public  void creatBacteriumTime()
+   {
+        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+        Runnable task1 = null;
+        task1 = () -> creatBacterium();
+        service.scheduleAtFixedRate(task1,20,10, TimeUnit.SECONDS);
+      
+       
+    //scheduleWithFixedDelay es aconsejable usarlo cuando no importa que se siga un patron de tiempo, distinto a scheduleFixedRate que se ejecuta cronologicamente siempre
+   }
+      /**
+       * 
+       */
+      private void creatBacterium()
+      {
+            int[] positionEnd= chooseRandomPositionBacterium();
+            int[] positionInit = chooseRandomPositionBacterium(); 
+            bacterium = new BlockerBacterium(positionInit[0],positionInit[1],this,positionEnd[0],positionEnd[1]);
+            bacteriums.add(bacterium);
+            bacterium.setSprite(antibiotic);
+            bacterium.setBoxes(boxes);  
+             bacteriums.add(bacterium);
+            this.addBoxBacteriumTime();
+           
+          
+      }
      
      /**
       * mide el tiempo de la bomba en explotar
       */
-      public  void scheduleDelayTask1(int option)
-   {
+      public  void scheduleDelayTask1()
+      {
         ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
         Runnable task1 = null;
    
         
           task1 = () -> antibiotic.deleteBomb();
            service.scheduleAtFixedRate(task1,5,1, TimeUnit.SECONDS);
-      
+            
        
     //scheduleWithFixedDelay es aconsejable usarlo cuando no importa que se siga un patron de tiempo, distinto a scheduleFixedRate que se ejecuta cronologicamente siempre
-   }
+      }
       
-      public void timeBox(Box box)
+      /**
+       * 
+       * @param other 
+       */
+      public void timeBox(Sprite other)
       {
          ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
          Runnable task1 = null;
-         task1 = () -> boxes.remove(box);
+         this.tableGame[other.getX()/42][other.getY()/50] = 0;
+        
+            task1 = () -> boxes.remove(other);
+        
          service.scheduleAtFixedRate(task1,4,1, TimeUnit.SECONDS);
-         box.getContainer().refresh();
+         other.getContainer().refresh();
+         
+      }
+      
+      /**
+       * 
+       * @param other 
+       */
+        public void timeBacterium(Sprite other)
+      {
+         ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+         Runnable task1 = null;
+         this.tableGame[other.getX()/42][other.getY()/50] = 0;
+         
+        task1 = () -> bacteriums.remove(other);
+         
+         service.scheduleAtFixedRate(task1,4,2, TimeUnit.SECONDS);
+         other.getContainer().refresh();
          
       }
       
@@ -231,7 +322,7 @@ public abstract class Stage extends StaticSprite implements Container{
         super.getContainer().refresh();
     } 
      
-      /**
+     /**
      * 
      */
     public Sprite checkLimitsBox() {
@@ -241,8 +332,8 @@ public abstract class Stage extends StaticSprite implements Container{
             box = boxes.get(i);
             boolean controlAntibiotic  = antibiotic.checkCollision(box);
             boolean controlBacterium  = antibiotic.checkCollision(bacterium);
-            boolean estado  = exploitBox( box);
-        
+            boolean state  = exploitBomb(box);
+            
             
             if(controlAntibiotic) {
                 
@@ -252,28 +343,47 @@ public abstract class Stage extends StaticSprite implements Container{
                 
                   return bacterium;
             }
-            if(estado)
+            if(state)
             {
               tableGame[box.getX()/42][box.getY()/50]=0;
-              timeBox( box);     
+              timeBox(box);     
             }
+           
         }
        
         return box;
       
+    }  
+      /**
+     * 
+     */
+    public void checkLimitsBacterium() {
+        
+         
+        for(int i = 0; i < bacteriums.size(); i++) {
+            bacterium = bacteriums.get(i);
+            boolean controlBacterium  = antibiotic.checkCollision(bacterium);
+            boolean state  = exploitBomb(bacterium);
+            
+            if(state)
+            {
+              timeBacterium(bacterium) ;    
+            }
+           
+        }   
     }  
     
     /**
      * 
      * @return 
      */
-    private boolean exploitBox(Box box) {
+    private boolean exploitBomb(Sprite other) {
         
         boolean estado = false;
         for(int i = 0; i < antibiotic.getBombs().size(); i++) {
             
            antibiotic.setBomb( antibiotic.getBombs().get(i));
-           estado = antibiotic.getBomb().checkCollision(box);
+           estado = antibiotic.getBomb().checkCollision(other);
            
            if(estado)
            {
@@ -281,12 +391,28 @@ public abstract class Stage extends StaticSprite implements Container{
            }
           
         }
-        return estado;
-       
-      
-      
+        return estado; 
     }  
-    
-    
-    
+   
+    /**
+     * Escoge la posicion final de la bacteria
+     */
+    private int[] chooseRandomPositionBacterium()
+    {
+        int x = 0;
+        int y = 0;
+        while(tableGame[x][y] != 0 )
+        {
+            if(x != antibiotic.getX()+5 & y != antibiotic.getY())
+            {
+              x = (int) (Math.random() * tableGame.length-1);
+              y = (int)  (Math.random()*tableGame[0].length-1); 
+            }          
+        }
+        int [] positionEnd = new int[2];
+        positionEnd[0] = x*box.getWidth();
+        positionEnd[1] = y*box.getHeight();
+        System.out.println(positionEnd[0]+" "+positionEnd[1]);
+        return positionEnd;
+    }
 }

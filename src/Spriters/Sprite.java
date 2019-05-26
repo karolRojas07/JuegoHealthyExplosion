@@ -276,14 +276,12 @@ public abstract class Sprite {
     public boolean checkCollision(Sprite other)
     {
         // Collision x-axis?
-        boolean collisionX = this.getX() + this.getWidth() >= other.getX()+5 &&
+        boolean collisionX = this.getX() + this.getWidth() >= other.getX()+10 &&
             this.getX() <= other.getX()-10 + other.getWidth();
 
         // Collision y-axis?
         boolean collisionY = this.getY() + this.getHeight() >= other.getY()+10 &&
             this.getY() <= other.getY()-10 + other.getHeight();
- 
-        System.out.println("colisiono");
         
         // Collision only if on both axes
         return collisionX && collisionY;        

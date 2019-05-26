@@ -20,9 +20,11 @@ import java.util.logging.Logger;
 public abstract class Bacterium extends MovableSprite{
     
     private ArrayList<Box > boxes ;
-    private int[][] tableGame;
     private Sprite sprite; 
     private String url ;
+    private boolean indicator = false;
+    private int xSide ;
+    private int ySide ;
 
     public ArrayList<Box> getBoxes() {
         return boxes;
@@ -40,18 +42,16 @@ public abstract class Bacterium extends MovableSprite{
         this.sprite = sprite;
     }
 
-    public int[][] getTableGame() {
-        return tableGame;
-    }
-
-    public void setTableGame(int[][] tableGame) {
-        this.tableGame = tableGame;
-    }
     
-    public Bacterium(String url, int x, int y, int width, int height,Container container) {
+    public Bacterium(String url, int x, int y, int width, int height,Container container,int xSide, int ySide) {
         super(x, y, width, height,container);
         this.url = url;
-        boxes = new ArrayList<>();}
+        this.xSide = xSide;
+        this.ySide = ySide;
+        boxes = new ArrayList<>();
+
+    }
+        
         
       
     public abstract void move();
@@ -84,6 +84,22 @@ public abstract class Bacterium extends MovableSprite{
          
     }
      
+    public boolean isIndicator() {
+        return indicator;
+    }
+
+    public void setIndicator(boolean indicator) {
+        this.indicator = indicator;
+    }
+
+    public int getxSide() {
+        return xSide;
+    }
+
+    public int getySide() {
+        return ySide;
+    }
     
+     
     
 }
