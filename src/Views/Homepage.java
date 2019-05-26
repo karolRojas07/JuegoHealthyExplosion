@@ -66,7 +66,7 @@ public class Homepage extends javax.swing.JDialog {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 470, 40));
 
-        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fondo#.jpg"))); // NOI18N
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/fondoInicio.jpg"))); // NOI18N
         getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 480, 410));
 
         pack();

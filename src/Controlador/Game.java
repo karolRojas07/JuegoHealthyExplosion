@@ -46,8 +46,10 @@ public class Game extends Sprite implements Container{
         this.readerStage = readerStage;
     }
     
-//    
-
+    /**
+     * guarda el escenario
+     * @param stage 
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
