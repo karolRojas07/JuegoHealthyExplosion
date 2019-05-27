@@ -48,6 +48,7 @@ public class ScreenGame extends javax.swing.JFrame {
     public void openScreen()
     {
         this.setLocationRelativeTo(null);
+        //rghrhsyhr
         this.setVisible(true);
     }
     
