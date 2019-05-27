@@ -8,6 +8,7 @@ package healthyexplosion;
 import Controlador.Game;
 import Readers.DataGameReader;
 import Readers.ReaderStage;
+import Views.Homepage;
 import Views.ScreenGame;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -25,17 +26,23 @@ public class HealthyExplosion {
     public static void main(String[] args) {
         // TODO code application logic here
        
+       Homepage homePage = new Homepage(null,true);
        Game game = new Game (0, 0,800,700);
        ScreenGame screen = new ScreenGame(game);
+       
+      
        screen.setSize(800, 700); 
        screen.pack();
+       screen.setHomePage(homePage);
        DataGameReader reader = new ReaderStage();
        reader.read(game);
        game.setReaderStage(reader);
-       screen.open();
+       screen.openScreen();
+    
        
     }
 
+    
    
     
 }

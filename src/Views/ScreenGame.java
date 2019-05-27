@@ -14,7 +14,10 @@ import java.awt.Graphics;
  */
 public class ScreenGame extends javax.swing.JFrame {
 
+     private Homepage homePage;
+     private MenuGame menuGame;
      private Game game ;
+     private boolean state = false;
   
     public void paint(Graphics g)
     {
@@ -22,7 +25,28 @@ public class ScreenGame extends javax.swing.JFrame {
         
     }
 
-    public void open(){
+    public void setHomePage(Homepage homePage) {
+        this.homePage = homePage;
+    }
+    
+//    public void openScreen(){
+//        
+//        if(homePage.isState())
+//        {
+//           homePage.open();
+//        }
+//        else
+//        {
+//            menuGame.setVisible(true);
+//        }
+//        if(state)
+//        {
+//         this.setLocationRelativeTo(null);
+//         this.setVisible(true);
+//        }
+//    }
+    public void openScreen()
+    {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -31,8 +55,11 @@ public class ScreenGame extends javax.swing.JFrame {
      * Creates new form ScreenGame2
      */
     public ScreenGame(Game game) {
+        
         this.game = game;
         initComponents();
+       
+        
     }
 
     /**
@@ -47,6 +74,7 @@ public class ScreenGame extends javax.swing.JFrame {
         gamePanel1 = new Containers.GamePanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 formMousePressed(evt);

@@ -433,9 +433,6 @@ public abstract class Stage extends StaticSprite implements Container{
            
         }
          }
-          
-        
-       
     }
      
     
