@@ -13,7 +13,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 /**
- * the main character of the game which is controlled by the player
+ * The main character of the game which is controlled by the player
  * @author Maria y Karols
  */
 public class Antibiotic extends StaticSprite{
@@ -50,7 +50,9 @@ public class Antibiotic extends StaticSprite{
      * @param g 
      */
     @Override
-    public void draw(Graphics g) {super.paint(g); }
+    public void draw(Graphics g) {
+        putBomb(g);
+        super.paint(g); }
     
     /**
      *  paint the bombs
@@ -78,44 +80,49 @@ public class Antibiotic extends StaticSprite{
      */
     public void move(int direction, Sprite other)
     {
+        int currentX=super.getX();
+        int currentY=super.getY();
+        switch(direction)
+        {
+            case KeyEvent.VK_UP:
+            {
+                super.setImage("src/Images/antibioticoBack.png");
+                setY(getY() - STEP);
+            break;
+            }
+            case KeyEvent.VK_DOWN:
+            {
+                super.setImage("src/Images/antibioticoFront.png");
+                setY(getY() + STEP);
+            break;
+            }
+            case KeyEvent.VK_LEFT:
+            {
+                super.setImage("src/Images/antibioticoLeft.png");
+                setX(getX() - STEP);
+            break;
+            }
+
+            case KeyEvent.VK_RIGHT:
+            {
+                super.setImage("src/Images/antibioticoRigth.png");
+                setX(getX() + STEP);
+            break;
+            }
+            default:
+            {
+                System.err.println("[ANTIBIOTIC.MOVE] Invalid Direction: " + direction);
+            break;
+            }
+        }
+        
          if(this.checkCollision(other) | isOutOfGameSection())
         {
+           super.setX(currentX);
+           super.setY(currentY);
            System.err.println("ANTIBIOTIC.MOVE] No se puede mover en esta dirección: "+direction);
         }
         else {  
-            switch(direction)
-            {
-                case KeyEvent.VK_UP:
-                {
-                    super.setImage("src/Images/antibioticoBack.png");
-                    setY(getY() - STEP);
-                break;
-                }
-                case KeyEvent.VK_DOWN:
-                {
-                    super.setImage("src/Images/antibioticoFront.png");
-                    setY(getY() + STEP);
-                break;
-                }
-                case KeyEvent.VK_LEFT:
-                {
-                    super.setImage("src/Images/antibioticoLeft.png");
-                    setX(getX() - STEP);
-                break;
-                }
-
-                case KeyEvent.VK_RIGHT:
-                {
-                    super.setImage("src/Images/antibioticoRigth.png");
-                    setX(getX() + STEP);
-                break;
-                }
-                default:
-                {
-                    System.err.println("[ANTIBIOTIC.MOVE] Invalid Direction: " + direction);
-                break;
-                }
-            }
             super.getContainer().refresh();  
          }
     }
