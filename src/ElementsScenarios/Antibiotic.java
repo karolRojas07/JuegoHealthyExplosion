@@ -30,8 +30,8 @@ public class Antibiotic extends StaticSprite{
       
     /**
      * create a new an
-     * @param x
-     * @param y 
+     * @param x posición en el eje x
+     * @param y posicion en el eje y
      */
     public Antibiotic(int x, int y) {
         super(x, y, 53, 50);
@@ -60,7 +60,7 @@ public class Antibiotic extends StaticSprite{
     {
        try
         {
-            for(Bomb bomb : bombs)
+           for(Bomb bomb : bombs)
            {
               bomb.draw(g);
               bomb.getContainer().refresh();
@@ -73,8 +73,8 @@ public class Antibiotic extends StaticSprite{
     
     /**
      * Move the Antibiotic 
-     * @param direction
-     * @param other 
+     * @param direction flecha seleccionada
+     * @param other objeto para verificar colisión
      */
     public void move(int direction, Sprite other)
     {
@@ -86,43 +86,48 @@ public class Antibiotic extends StaticSprite{
             switch(direction)
             {
                 case KeyEvent.VK_UP:
+                {
                     super.setImage("src/Images/antibioticoBack.png");
                     setY(getY() - STEP);
                 break;
-
+                }
                 case KeyEvent.VK_DOWN:
+                {
                     super.setImage("src/Images/antibioticoFront.png");
                     setY(getY() + STEP);
                 break;
-
+                }
                 case KeyEvent.VK_LEFT:
+                {
                     super.setImage("src/Images/antibioticoLeft.png");
                     setX(getX() - STEP);
                 break;
+                }
 
                 case KeyEvent.VK_RIGHT:
+                {
                     super.setImage("src/Images/antibioticoRigth.png");
                     setX(getX() + STEP);
                 break;
-
+                }
                 default:
+                {
                     System.err.println("[ANTIBIOTIC.MOVE] Invalid Direction: " + direction);
                 break;
+                }
             }
             super.getContainer().refresh();  
          }
-        
     }
     
     /**
      * add a new bomb
-     * @param container
+     * @param container 
      */
     public void addBomb(Container container)
     {
         Bomb bomb = new Bomb(this.getX() ,this.getY()-this.getHeight()+10,container );
         bombs.add(bomb);
-
     }
     
     /**
@@ -133,7 +138,5 @@ public class Antibiotic extends StaticSprite{
         bombs.forEach((bomb) -> {
             bombs.remove(bomb);
     });
-    }
-
-    
+    }    
 }
