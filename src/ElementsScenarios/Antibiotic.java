@@ -10,153 +10,130 @@ import Spriters.Sprite;
 import Spriters.StaticSprite;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 /**
- *
- * @author usuario
+ * the main character of the game which is controlled by the player
+ * @author Maria y Karols
  */
 public class Antibiotic extends StaticSprite{
-
-    public static final int STEP = 8;
-    private boolean validateBox = false;
-    private Bomb bomb;
+    
+    /**
+     * the speed of the Antibiotic
+     */
+    private final int STEP = 8;
+    
+    /**
+     * The bombs tha has put the antibiotic
+     */
     private ArrayList<Bomb> bombs ;
-
+      
+    /**
+     * create a new an
+     * @param x
+     * @param y 
+     */
     public Antibiotic(int x, int y) {
         super(x, y, 53, 50);
-        BufferedImage image =super.setImage("src/Images/personajePrincipal.png");
-        super.setImage(image); 
+        super.setImage("src/Images/antibioticoFront.png");
         bombs = new ArrayList<>();
-    }
-
-    public boolean isValidateBox() {
-        return validateBox;
-    }
-
-    public void setValidateBox(boolean validateBox) {
-        this.validateBox = validateBox;
-    }
-
-    public void setBomb(Bomb bomb) {
-        this.bomb = bomb;
     }
     
     /**
-     * 
+     * get the bombs 
+     * @return all bombs that has the antibiotic
+     */
+    public ArrayList<Bomb> getBombs() { return bombs; } 
+    
+    /**
+     * paint the antibiotic 
      * @param g 
      */
     @Override
-    public void draw(Graphics g) {
-        
-         for(Bomb bomb : bombs)
-        {
-           
-           bomb.draw(g);
-           bomb.getContainer().refresh();
-        }
-        super.paint(g);
-       
-    }
+    public void draw(Graphics g) {super.paint(g); }
+    
     /**
-     * 
+     *  paint the bombs
      * @param g 
      */
-    public void drawBomb(Graphics g)
+    public void putBomb(Graphics g)
     {
-       
-        for(Bomb bomb : bombs)
+       try
         {
-           
-           bomb.draw(g);
-           bomb.getContainer().refresh();
+            for(Bomb bomb : bombs)
+           {
+              bomb.draw(g);
+              bomb.getContainer().refresh();
+           }
+        }catch(java.util.ConcurrentModificationException e)
+        {
+            System.out.println("[ANTIBIOTIC.DRAW] "+ e.getMessage());
         }
-       
     }
     
     /**
-     * 
+     * Move the Antibiotic 
      * @param direction
      * @param other 
      */
     public void move(int direction, Sprite other)
     {
-        int nx = getX();
-        int ny = getY();
-        
-        
-        switch(direction)
+         if(this.checkCollision(other) | isOutOfGameSection())
         {
-            
-            case KeyEvent.VK_UP:
-                setY(getY() - STEP);
-            break;
-            case KeyEvent.VK_DOWN:
+           System.err.println("ANTIBIOTIC.MOVE] No se puede mover en esta dirección: "+direction);
+        }
+        else {  
+            switch(direction)
             {
-                setY(getY() + STEP);
-            }break;
-            case KeyEvent.VK_LEFT:
-                setX(getX() - STEP);
-            break;
-            case KeyEvent.VK_RIGHT:
-                setX(getX() + STEP);
-            break;
-            
-            default:
-                System.err.println("[PLAYER.MOVE] Invalid Direction: " + direction);
-            break;
-        }
-        
-         if(this.checkCollision(other))
-        {
-           
-            setX(nx);
-            setY(ny);
-             
-            
-     
-        }
-        if(isOutOfGameSection())
-        {
-            setX(nx);
-            setY(ny);
-           
-        }
-        else
-        {
-            
-          super.getContainer().refresh();
-        }
-    }
-        /**
-         * 
-         */
-        public void createBomb(Container container)
-        {
-            bomb = new Bomb(this.getX() ,this.getY()-this.getHeight()+10,container );
-            bombs.add(bomb);
-            
-        }
-        public void deleteBomb()
-        {
-            for(Bomb bomb : bombs)
-            {
-               bombs.remove(bomb);
+                case KeyEvent.VK_UP:
+                    super.setImage("src/Images/antibioticoBack.png");
+                    setY(getY() - STEP);
+                break;
+
+                case KeyEvent.VK_DOWN:
+                    super.setImage("src/Images/antibioticoFront.png");
+                    setY(getY() + STEP);
+                break;
+
+                case KeyEvent.VK_LEFT:
+                    super.setImage("src/Images/antibioticoLeft.png");
+                    setX(getX() - STEP);
+                break;
+
+                case KeyEvent.VK_RIGHT:
+                    super.setImage("src/Images/antibioticoRigth.png");
+                    setX(getX() + STEP);
+                break;
+
+                default:
+                    System.err.println("[ANTIBIOTIC.MOVE] Invalid Direction: " + direction);
+                break;
             }
-        }
-
-    public Bomb getBomb() {
-        return bomb;
-    }
-
-    public ArrayList<Bomb> getBombs() {
+            super.getContainer().refresh();  
+         }
         
-        return bombs;
     }
     
+    /**
+     * add a new bomb
+     * @param container
+     */
+    public void addBomb(Container container)
+    {
+        Bomb bomb = new Bomb(this.getX() ,this.getY()-this.getHeight()+10,container );
+        bombs.add(bomb);
+
+    }
     
-    
-    
+    /**
+     * delete a bomb
+     */
+    public void deleteBomb()
+    {
+        bombs.forEach((bomb) -> {
+            bombs.remove(bomb);
+    });
+    }
+
     
 }
