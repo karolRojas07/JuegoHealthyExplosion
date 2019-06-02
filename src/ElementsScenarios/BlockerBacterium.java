@@ -8,10 +8,8 @@ package ElementsScenarios;
 import Containers.Container;
 import Spriters.Sprite;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.xml.bind.ParseConversionEvent;
 
 /**
  *
@@ -19,18 +17,24 @@ import javax.xml.bind.ParseConversionEvent;
  */
 public class BlockerBacterium extends Bacterium {
 
-   
-    public BlockerBacterium(int x, int y, Container container,int xSide, int ySide) {
-        super("src/Images/constructoraBacterium.png", x, y,51,50, container,xSide,ySide);
+   /**
+    * Create a new Blocker Bacterium
+    * @param x position in the x axis
+    * @param y position in the y axis
+    * @param container Where is located the blocker bacterium
+    * @param finalX  position in the x axis where the blocker bacterium finish its work
+    * @param finalY  position in the y axis where the blocker bacterium finish its work
+    */
+    public BlockerBacterium(int x, int y, Container container,int finalX, int finalY) {
+        super(x, y,51,50, container,finalX,finalY);
+        super.setImage("src/Images/constructoraBacterium.png");
         
-         BufferedImage image = super.setImage(super.getUrl());
-         super.setImage(image);
-        
-         this.getThread().start();
-        
+        super.getThread().start();
     }
     
-    
+    /**
+    * The movement of the blocker bacterium
+    */
     @Override
     public void move()
     {
@@ -38,17 +42,17 @@ public class BlockerBacterium extends Bacterium {
         int nX = this.getX();
         int nY = this.getY();
         int step = 7;
-//       System.out.println("X "+nX+" Y "+nY);
+        
          for(int fila = 0; fila < step; fila++)
             {
                Sprite sprite = this.checkLimitsSprite();
                  
-               if(this.checkCollision(sprite) & this.getySide()> nY)
+               if(this.checkCollision(sprite) & this.getFinalY()> nY)
                {
                    this.setX(nX-step);
                    this.setY(nY+step);
                }
-               else if(this.checkCollision(sprite) & this.getySide()< nY)
+               else if(this.checkCollision(sprite) &  this.getFinalY()< nY)
                {
                    this.setX(nX-step);
                    this.setY(nY-step);
@@ -77,24 +81,17 @@ public class BlockerBacterium extends Bacterium {
             }
          
     }
+    
     /**
-     * 
-     */
+    * Start the thread to make the s blocker baterium move by its own
+    */
     @Override
     public void run() {
-        
-        
          while(true)
         {
-            //this.setX(this.getX()+10);
-            
-            //super.getContainer().refresh();
-            //this.getContainer().refresh();
-            
             try {
                 Thread.sleep(200);
-                
-                 move();
+                move();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Bacterium.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -106,7 +103,7 @@ public class BlockerBacterium extends Bacterium {
    
 
     /**
-     * 
+     * Paint the blocker bacterium
      * @param g 
      */
     @Override
@@ -114,12 +111,5 @@ public class BlockerBacterium extends Bacterium {
         
         super.paint(g);
     }
-
-  
-    
-   
-
-    
-    
     
 }

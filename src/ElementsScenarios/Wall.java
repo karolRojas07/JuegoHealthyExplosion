@@ -6,7 +6,6 @@
 package ElementsScenarios;
 
 import Containers.Container;
-import java.awt.Color;
 import java.awt.Graphics;
 
 /**
@@ -15,8 +14,8 @@ import java.awt.Graphics;
  */
 public class Wall extends Box{
 
-    public Wall(int x, int y) {
-        super(x, y, 42, 48);
+    public Wall(int x, int y, Container container) {
+        super(x, y, 42, 48,container);
     }
 
     /**

@@ -5,6 +5,7 @@
  */
 package ElementsScenarios;
 
+import Containers.Container;
 import Spriters.StaticSprite;
 import java.awt.Graphics;
 
@@ -18,9 +19,10 @@ public class Bomb extends StaticSprite{
      * Create a new bomb
      * @param x the position in the x axis
      * @param y the position in the x axis
+     * @param container
      */
-    public Bomb(int x, int y) {
-        super(x, y, 42,42);
+    public Bomb(int x, int y,Container container) {
+        super(x, y, 42,42,container);
         super.setImage("src/Images/bomba.png"); 
     }
     

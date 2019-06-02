@@ -6,10 +6,10 @@
 package ElementsScenarios;
 
 /**
- *
- * @author usuario
+ * Make decrease the antibiotic's speed
+ * @author María y Karol
  */
-public class Sickness {
+public class Weakness {
     
     
     

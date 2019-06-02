@@ -6,40 +6,49 @@
 package ElementsScenarios;
 
 import Containers.Container;
-import Spriters.Sprite;
 import java.awt.Graphics;
 
 /**
- *
- * @author usuario
+ * An enemy of the antibiotic who steals the pieces of the antibiotic
+ * @author Maria y Karol
  */
 public class ThiefBacterium extends Bacterium{
-
-    public ThiefBacterium(String url, int x, int y, int width, int height, Container container, int xSide, int ySide) {
-        super(url, x, y, width, height, container, xSide, ySide);
-    }
-
     
-
+    /**
+     * Create a new Thief bacterium
+    * @param x position in the x axis
+    * @param y position in the y axis
+    * @param container Where is located the Thief bacterium
+    * @param xSide width of the Thief bacterium
+    * @param ySide heigth of the blocker bacterium
+     */
+    public ThiefBacterium(int x, int y, int width, int height, Container container, int xSide, int ySide) {
+        super(x, y, width, height, container, xSide, ySide);
+    }
+     
+    /**
+     * Paint the Thief bacterium
+     * @param g 
+     */
     @Override
     public void draw(Graphics g) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    /**
+     * The movement of the Thief Bacterium
+     */
+    @Override
+    public void move() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    /**
+    * Start the thread to make the Thief baterium move by its own
+    */
     @Override
     public void run() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void move() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-  
-
-   
-
-   
-    
 }

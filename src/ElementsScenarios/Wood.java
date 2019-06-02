@@ -10,13 +10,14 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 /**
- *
- * @author usuario
+ * It's the easiest kind of box to destroy with just one hit
+ * @author María y Karol
  */
 public class Wood extends Box{
 
-    public Wood(int x, int y) {
-        super(x, y, 42, 48);
+    
+    public Wood(int x, int y, Container container) {
+        super(x, y, 42, 48,container);
         BufferedImage image =super.setImage("src/Images/cajaMadera.jpg");
         super.setImage(image); 
     }
@@ -27,7 +28,4 @@ public class Wood extends Box{
         super.paint(g);
         
     }
-    
-    
-    
 }

@@ -32,9 +32,10 @@ public class Antibiotic extends StaticSprite{
      * create a new an
      * @param x posición en el eje x
      * @param y posicion en el eje y
+     * @param container
      */
-    public Antibiotic(int x, int y) {
-        super(x, y, 53, 50);
+    public Antibiotic(int x, int y,Container container) {
+        super(x, y, 53, 50,container);
         super.setImage("src/Images/antibioticoFront.png");
         bombs = new ArrayList<>();
     }
@@ -128,12 +129,12 @@ public class Antibiotic extends StaticSprite{
     }
     
     /**
-     * add a new bomb
-     * @param container 
+     * add a new bomb 
+     * @param container
      */
     public void addBomb(Container container)
     {
-        Bomb bomb = new Bomb(this.getX() ,this.getY()-this.getHeight()+10,container );
+        Bomb bomb = new Bomb(this.getX() ,this.getY()-this.getHeight()+10,container);
         bombs.add(bomb);
     }
     
