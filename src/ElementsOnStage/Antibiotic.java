@@ -36,7 +36,7 @@ public class Antibiotic extends StaticSprite{
      */
     public Antibiotic(int x, int y,Container container) {
         super(x, y, 53, 50,container);
-        super.setImage("src/Images/antibioticoFront.png");
+        super.setImage("src/Images/antibioticFront.png");
         bombs = new ArrayList<>();
     }
     
@@ -87,26 +87,26 @@ public class Antibiotic extends StaticSprite{
         {
             case KeyEvent.VK_UP:
             {
-                super.setImage("src/Images/antibioticoBack.png");
+                super.setImage("src/Images/antibioticBack.png");
                 setY(getY() - STEP);
             break;
             }
             case KeyEvent.VK_DOWN:
             {
-                super.setImage("src/Images/antibioticoFront.png");
+                super.setImage("src/Images/antibioticFront.png");
                 setY(getY() + STEP);
             break;
             }
             case KeyEvent.VK_LEFT:
             {
-                super.setImage("src/Images/antibioticoLeft.png");
+                super.setImage("src/Images/antibioticLeft.png");
                 setX(getX() - STEP);
             break;
             }
 
             case KeyEvent.VK_RIGHT:
             {
-                super.setImage("src/Images/antibioticoRigth.png");
+                super.setImage("src/Images/antibioticRigth.png");
                 setX(getX() + STEP);
             break;
             }

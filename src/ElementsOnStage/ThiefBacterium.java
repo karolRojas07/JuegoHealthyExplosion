@@ -22,8 +22,10 @@ public class ThiefBacterium extends Bacterium{
     * @param xSide width of the Thief bacterium
     * @param ySide heigth of the blocker bacterium
      */
-    public ThiefBacterium(int x, int y, int width, int height, Container container, int xSide, int ySide) {
-        super(x, y, width, height, container, xSide, ySide);
+    public ThiefBacterium(int x, int y, Container container, int xSide, int ySide) {
+        super(x, y, 51,50, container, xSide, ySide);
+        super.setImage("src/Images/ThiefBacterium.png");
+        
     }
      
     /**

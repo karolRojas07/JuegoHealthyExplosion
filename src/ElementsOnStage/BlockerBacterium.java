@@ -27,7 +27,7 @@ public class BlockerBacterium extends Bacterium {
     */
     public BlockerBacterium(int x, int y, Container container,int finalX, int finalY) {
         super(x, y,51,50, container,finalX,finalY);
-        super.setImage("src/Images/constructoraBacterium.png");
+        super.setImage("src/Images/blockerBacterium.png");
         
         super.getThread().start();
     }

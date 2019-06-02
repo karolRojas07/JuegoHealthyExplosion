@@ -21,7 +21,8 @@ public class Metal extends Box {
      * @param container where is located the box
      */
     public Metal(int x, int y, Container container) {
-        super(x, y, 42, 48, container);
+        super(x, y, 42, 50, container);
+        super.setImage("src/Images/ImgMetalBox.jpg");
         super.setResistance(2);
     }
 
