@@ -6,8 +6,8 @@
 package Content_Of_Box;
 
 /**
- *
- * @author usuario
+ * Element in the first level(Stomach)needed to pass to the second level(lungs)
+ * @author Maria y Karol
  */
 public class Key extends Piece {
     
