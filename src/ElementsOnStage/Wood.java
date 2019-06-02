@@ -7,7 +7,6 @@ package ElementsOnStage;
 
 import Containers.Container;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
 /**
  * It's the easiest kind of box to destroy with just one hit
@@ -18,8 +17,8 @@ public class Wood extends Box{
     
     public Wood(int x, int y, Container container) {
         super(x, y, 42, 48,container);
-        BufferedImage image =super.setImage("src/Images/cajaMadera.jpg");
-        super.setImage(image); 
+        super.setImage("src/Images/cajaMadera.jpg");
+        super.setResistance(1);
     }
     
     @Override

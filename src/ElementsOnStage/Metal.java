@@ -24,6 +24,7 @@ public class Metal extends Box {
      */
     public Metal(int x, int y, int width, int height, Container container) {
         super(x, y, width, height, container);
+        super.setResistance(2);
     }
 
     /**

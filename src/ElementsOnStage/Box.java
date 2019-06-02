@@ -14,6 +14,7 @@ import Spriters.StaticSprite;
  */
 public abstract class Box extends StaticSprite{
     
+    private int resistance;
     /**
      * Create a new box
      * @param x position in the x axis
@@ -25,4 +26,10 @@ public abstract class Box extends StaticSprite{
     public Box(int x, int y, int width, int height, Container container) {
         super(x, y, width, height, container);
     }
+
+    public void setResistance(int resistance) {
+        this.resistance = resistance;
+    }
+    
+    
 }
