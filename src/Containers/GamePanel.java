@@ -24,7 +24,7 @@ public class GamePanel extends javax.swing.JPanel implements Container{
  
     /**
      * Define the game
-     * @param game 
+     * @param game el contralador
      */
     public void setGame(Game game) {
         this.game = game;
