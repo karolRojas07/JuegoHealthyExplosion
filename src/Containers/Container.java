@@ -5,16 +5,24 @@
  */
 package Containers;
 
-import java.awt.Dimension;
 import java.awt.Rectangle;
 
 /**
- *
- * @author maria
+ * It is used in each object that implements it or has it to update their 
+ * graphic statuss
+ * @author maria y karol
  */
 public interface Container {
     
+    /**
+     * To update in the view
+     */
     public void refresh();
+    
+    /**
+     * return the object's area
+     * @return 
+     */
     public Rectangle getBoundaries();
     
 }
