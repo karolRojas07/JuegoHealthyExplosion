@@ -43,7 +43,7 @@ public class GamePanel extends javax.swing.JPanel implements Container{
             game.draw(g);
             game.paint(g);
         }
-        else{  System.err.println("[GAMEPANEL.PAINT] World is null!");}
+        else{  System.err.println("[GAMEPANEL.PAINT] Controller game is null!");}
     }
     
     /**
