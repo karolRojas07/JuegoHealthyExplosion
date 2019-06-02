@@ -6,8 +6,8 @@
 package Content_Of_Box;
 
 /**
- *
- * @author usuario
+ * An extra ability to the player
+ * @author Maria y Karol
  */
 public abstract class Power extends Content{
     
