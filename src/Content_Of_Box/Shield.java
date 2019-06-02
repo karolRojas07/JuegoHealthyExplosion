@@ -6,8 +6,8 @@
 package Content_Of_Box;
 
 /**
- *
- * @author usuario
+ * Prevent the player form lose one lifes
+ * @author Maria y Karol
  */
 public class Shield extends Power{
     
