@@ -11,23 +11,28 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 /**
- *
- * @author maria
+ * 
+ * @author Maria y Karol
  */
 public class GamePanel extends javax.swing.JPanel implements Container{
-
+    
+    /**
+     * Knows the game to real implement its graphic part
+     */
     private Game game ;
 
  
-    
+    /**
+     * Define the game
+     * @param game 
+     */
     public void setGame(Game game) {
         this.game = game;
         game.setContainer(this);
-        
     }
     
     /**
-     * 
+     * Draw the game
      * @param g 
      */
      @Override
@@ -38,45 +43,34 @@ public class GamePanel extends javax.swing.JPanel implements Container{
             game.draw(g);
             game.paint(g);
         }
-        else
-            System.err.println("[GAMEPANEL.PAINT] World is null!");
+        else{  System.err.println("[GAMEPANEL.PAINT] World is null!");}
     }
     
     /**
-     * 
+     * Update the object in the View
      */
     @Override
-    public void refresh() {
-        
-        this.repaint();
-        
-      
-    }
+    public void refresh() {this.repaint(); }
 
     /**
-     * 
-     * @return 
+     * Get the measurements of the game panel
+     * @return Rectangle object that is used in the graph part
      */
     @Override
-    public Rectangle getBoundaries() {
-        
-       return getBounds();
-     
-    }
+    public Rectangle getBoundaries() { return this.getBounds();}
+    
     /**
-     * 
+     * Get the needed size of the object
+     * @return the size of the game object
      */
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(game.getWidth(),game.getHeight());
-    }
+        return new Dimension(game.getWidth(),game.getHeight());  }
+    
     /**
      * Creates new form GamePanel
      */
-    public GamePanel() {
-      
-        initComponents();
-    }
+    public GamePanel() { initComponents();}
 
     /**
      * This method is called from within the constructor to initialize the form.
