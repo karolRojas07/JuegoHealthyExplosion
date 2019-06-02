@@ -6,11 +6,9 @@
 package Content_Of_Box;
 
 /**
- *
- * @author usuario
+ * Element inside a box
+ * @author Maria y Karol
  */
 public abstract class Content {
-    
-    
     
 }
