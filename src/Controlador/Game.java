@@ -32,10 +32,10 @@ public class Game extends Sprite implements Container{
    
     /**
      * Create a new game
-     * @param x
-     * @param y
-     * @param width
-     * @param height 
+     * @param x position in the x axis of the game
+     * @param y position in the x axis of the game
+     * @param width of the game
+     * @param height of the game
      */
     public Game(int x, int y, int width, int height) {
         super(x, y, width, height);
@@ -44,7 +44,7 @@ public class Game extends Sprite implements Container{
     
     /**
      * Define the reader of the stage data information
-     * @param readerStage 
+     * @param readerStage the reader of the information
      */
     public void setReaderStage(DataGameReader readerStage) {
         this.readerStage = readerStage;
@@ -52,7 +52,7 @@ public class Game extends Sprite implements Container{
     
     /**
      * Define the stage
-     * @param stage 
+     * @param stage Stage where is playing the user
      */
     public void setStage(Stage stage) { this.stage = stage;  }
     
@@ -88,5 +88,4 @@ public class Game extends Sprite implements Container{
     public Rectangle getBoundaries() {
         return new Rectangle(super.getX(), super.getY(), super.getWidth(), super.getHeight());
     }
-  
 }
