@@ -6,7 +6,7 @@
 package Content_Of_Box;
 
 /**
- * Piece needed to pass the next level
+ * Piece needed to pass to the next level
  * @author Maria y Karol
  */
 public abstract class Piece extends Content {

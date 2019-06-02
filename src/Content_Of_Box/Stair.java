@@ -6,8 +6,8 @@
 package Content_Of_Box;
 
 /**
- *
- * @author usuario
+ * Element in the second level(lungs)needed to pass to the last level(heart)
+ * @author Maria y Karol
  */
 public class Stair extends Piece{
     

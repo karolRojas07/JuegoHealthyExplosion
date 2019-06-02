@@ -6,7 +6,7 @@
 package Content_Of_Box;
 
 /**
- * An award to the players
+ * An award to the antibiotic
  * @author Maria y Karol
  */
 public abstract class Prize extends Content {

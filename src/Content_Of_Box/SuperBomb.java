@@ -6,8 +6,8 @@
 package Content_Of_Box;
 
 /**
- *
- * @author usuario
+ * Destroys all kind of box around it
+ * @author Maria y Karol
  */
 public class SuperBomb extends Prize{
     

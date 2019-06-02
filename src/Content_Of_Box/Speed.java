@@ -6,8 +6,8 @@
 package Content_Of_Box;
 
 /**
- *
- * @author usuario
+ * increase the speed of the antibiotic
+ * @author Maria y Karol
  */
 public class Speed extends Power{
     

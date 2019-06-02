@@ -6,8 +6,8 @@
 package Content_Of_Box;
 
 /**
- *
- * @author usuario
+ * decrease the speed of the antibiotic
+ * @author Maria y Karol
  */
 public abstract class Weakness  extends Content {
     
