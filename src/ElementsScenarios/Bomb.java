@@ -8,25 +8,30 @@ package ElementsScenarios;
 import Containers.Container;
 import Spriters.StaticSprite;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
 /**
  *
- * @author usuario
+ * @author Maria y Karol
  */
 public class Bomb extends StaticSprite{
-
     
+    /**
+     * Create a new bomb
+     * @param x the position in the x axis
+     * @param y the position in the x axis
+     * @param container where is going to be painted the bomb
+     */
     public Bomb(int x, int y, Container container) {
         super(x, y, 42,42,container);
-        BufferedImage image =super.setImage("src/Images/bomba.png");
-        super.setImage(image); 
-    }
-
-    @Override
-    public void draw(Graphics g) {
-        
-        super.paint(g);
+        super.setImage("src/Images/bomba.png"); 
     }
     
+    /**
+     * Paint the bomb
+     * @param g 
+     */
+    @Override
+    public void draw(Graphics g) {
+        super.paint(g);
+    }
 }
