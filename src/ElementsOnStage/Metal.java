@@ -15,15 +15,13 @@ import java.awt.Graphics;
 public class Metal extends Box {
     
     /**
-      * Create a new box
+     * Create a new box
      * @param x position in the x axis
      * @param y position in the y axis
-     * @param width width of the box
-     * @param height height of the box
      * @param container where is located the box
      */
-    public Metal(int x, int y, int width, int height, Container container) {
-        super(x, y, width, height, container);
+    public Metal(int x, int y, Container container) {
+        super(x, y, 42, 48, container);
         super.setResistance(2);
     }
 

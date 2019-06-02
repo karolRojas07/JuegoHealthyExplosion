@@ -14,13 +14,22 @@ import java.awt.Graphics;
  */
 public class Wood extends Box{
 
-    
+    /**
+     * Create a new wood box
+     * @param x position in the x axis
+     * @param y position in the y axis
+     * @param container where is located the box
+     */
     public Wood(int x, int y, Container container) {
         super(x, y, 42, 48,container);
         super.setImage("src/Images/cajaMadera.jpg");
         super.setResistance(1);
     }
     
+    /**
+     * paint the wood box
+     * @param g 
+     */
     @Override
     public void draw(Graphics g) {
         
