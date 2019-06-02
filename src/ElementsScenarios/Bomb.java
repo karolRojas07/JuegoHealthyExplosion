@@ -5,12 +5,11 @@
  */
 package ElementsScenarios;
 
-import Containers.Container;
 import Spriters.StaticSprite;
 import java.awt.Graphics;
 
 /**
- *
+ * Used for the antibiotic to destroy the boxes and the bacterium
  * @author Maria y Karol
  */
 public class Bomb extends StaticSprite{
@@ -19,10 +18,9 @@ public class Bomb extends StaticSprite{
      * Create a new bomb
      * @param x the position in the x axis
      * @param y the position in the x axis
-     * @param container where is going to be painted the bomb
      */
-    public Bomb(int x, int y, Container container) {
-        super(x, y, 42,42,container);
+    public Bomb(int x, int y) {
+        super(x, y, 42,42);
         super.setImage("src/Images/bomba.png"); 
     }
     
