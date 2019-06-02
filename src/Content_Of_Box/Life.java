@@ -7,7 +7,7 @@ package Content_Of_Box;
 
 /**
  * Give to the player a new extra life
- * @author usuario
+ * @author Maria y Karol
  */
 public class Life extends Prize{
     
