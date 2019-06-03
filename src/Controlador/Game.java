@@ -34,11 +34,10 @@ public class Game extends Sprite implements Container{
      * Create a new game
      * @param x position in the x axis of the game
      * @param y position in the x axis of the game
-     * @param width of the game
-     * @param height of the game
+
      */
-    public Game(int x, int y, int width, int height) {
-        super(x, y, width, height);
+    public Game(int x, int y) {
+        super(x, y, 800, 700);
       
     }
     
@@ -72,10 +71,11 @@ public class Game extends Sprite implements Container{
      * @param evt 
      */
      public void keyPressed(KeyEvent evt) { stage.keyPressed(evt); }
-      
-   
+      // path = "StomachScenario.txt"; 
+    //    reader.read(path);
+  // 
      /**
-      * Uptdate the game in the view
+      * Uptdate tshe game in the view
       */
     @Override
     public void refresh() { super.getContainer().refresh();}

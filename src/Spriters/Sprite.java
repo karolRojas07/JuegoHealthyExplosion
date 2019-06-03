@@ -83,7 +83,7 @@ public abstract class Sprite {
      public Sprite(int x, int y, int width, int height, Container container)
     {
         this(x, y, width, height);
-        setContainer(container);
+        this.container=container;
     }
     
     

@@ -6,19 +6,14 @@
 package Readers;
 
 import Controlador.Game;
-import ElementsScenarios.Antibiotic;
-import ElementsScenarios.Box;
-import ElementsScenarios.Wall;
-import ElementsScenarios.Wood;
+import ElementsOnStage.Antibiotic;
+import ElementsOnStage.Box;
 import Scenarios.Estomach;
 import Scenarios.Stage;
-import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -27,11 +22,19 @@ import java.util.logging.Logger;
 public class ReaderStage implements DataGameReader{
 
     private ArrayList<Box> boxes = new ArrayList<>();
+    private Game game;
     private Stage stage ;
     private Box box;
     private Antibiotic antibiotic;
     private int[][] tableGame = new int[19][16];
 
+//    public ReaderStage(Game game) {
+//        this.game = game;
+//    }
+//
+
+    
+    
     public ArrayList<Box> getBoxes() {
         return boxes;
     }
@@ -39,6 +42,7 @@ public class ReaderStage implements DataGameReader{
     public Antibiotic getAntibiotic() {
         return antibiotic;
     }
+
     
     /**
      * 
@@ -46,11 +50,11 @@ public class ReaderStage implements DataGameReader{
      * @param game 
      */
     @Override
-    public void read(Game game) {
+    public void read( String path) {
         
         try {
             
-             RandomAccessFile reader = new RandomAccessFile("StomachScenario.txt", "r");
+             RandomAccessFile reader = new RandomAccessFile(path, "r");
              String line =  null;
              int column = 0;
              while ( (line = reader.readLine() ) != null )
@@ -90,6 +94,50 @@ public class ReaderStage implements DataGameReader{
         }
         
             
+    }
+
+    @Override
+    public void read(Game game) {
+       try {
+            
+             RandomAccessFile reader = new RandomAccessFile("StomachScenario.txt", "r");
+             String line =  null;
+             int column = 0;
+             while ( (line = reader.readLine() ) != null )
+             {
+                 
+                 column +=1;
+                 String[] parts = line.split(" ");
+               
+                 if( column == 1)
+                 {
+                     if(parts[0].contains("E"))
+                     {
+                         stage = new Estomach(0,0,game);
+                         game.setStage(stage);
+                      
+                     }
+                 }
+                 else if (column < tableGame[0].length)
+                 {
+                    for(int file = 0;  file< parts.length ; file++ )
+                    {  
+                       tableGame[file][column-2] = Integer.parseInt(parts[file]); 
+                       
+                    } 
+                 }   
+             }
+              stage.setTableGame(tableGame);
+              stage.fixElements();
+             reader.close();
+            
+        } catch (FileNotFoundException ex) {
+            
+          
+        } catch (IOException ex) {
+            
+           
+        }
     }
     
     

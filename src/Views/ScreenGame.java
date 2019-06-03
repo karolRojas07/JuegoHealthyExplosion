@@ -14,53 +14,87 @@ import java.awt.Graphics;
  */
 public class ScreenGame extends javax.swing.JFrame {
 
-     private Homepage homePage;
-     private MenuGame menuGame;
+     private final Homepage homePage;
+     private final LevelGame levelGame;
+     private final MenuGame menuGame;
+     private final NameGame nameGame;
+     
      private Game game ;
-     private boolean state = false;
-  
+
+
+     
+     @Override
     public void paint(Graphics g)
     {
         game.draw(g);
-        
     }
 
-    public void setHomePage(Homepage homePage) {
-        this.homePage = homePage;
+    public void startGame(){
+        this.setSize(800, 700); 
+        this.pack();
+        
+        start();
+    }
+    private void start(){
+        homePage.open();
+        if (homePage.isState())
+        {
+            menuGame.open();
+            if(menuGame.isState())
+            {
+                switch(menuGame.getOption())
+                {
+                    case 0: // New Game
+                        levelGame.open();
+                        if(levelGame.isState())
+                        {
+                            nameGame.open();
+                            String name=nameGame.getName();
+                            startLevel(levelGame.getOption());
+                        }
+                        break;
+                    case 1: //Load Game
+                        break;
+                    case 2: //Save Game
+                        break;
+                    case 3: // Instructions
+                        break;
+                }
+            }else{
+               System.exit(WIDTH);
+            }
+        }else{
+            System.exit(WIDTH);
+        }
     }
     
-//    public void openScreen(){
-//        
-//        if(homePage.isState())
-//        {
-//           homePage.open();
-//        }
-//        else
-//        {
-//            menuGame.setVisible(true);
-//        }
-//        if(state)
-//        {
-//         this.setLocationRelativeTo(null);
-//         this.setVisible(true);
-//        }
-//    }
-    public void openScreen()
+    private void startLevel(int option)
     {
-        this.setLocationRelativeTo(null);
-        //rghrhsyhr
-        this.setVisible(true);
+        switch(option)
+        {
+            case 0:  //Estomach
+                
+                break;
+            case 1: //Lung
+                
+                break;
+            case 2: //Heart
+                
+                break;
+        }
+       
     }
-    
     /**
-     * Creates new form ScreenGame2
+     * Create a new ScreenGame
      */
     public ScreenGame(Game game) {
         
-        this.game = game;
+        this.game=game;
+        homePage= new Homepage(null, true);
+        levelGame=new LevelGame(null,true);
+        menuGame= new MenuGame(null, true);
+        nameGame= new NameGame(null, true);
         initComponents();
-       
-        
     }
 
     /**

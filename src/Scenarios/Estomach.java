@@ -6,37 +6,32 @@
 package Scenarios;
 
 import Containers.Container;
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Rectangle;
 
 /**
- *
- * @author usuario
+ * The First Level
+ * @author Maria y Karol
  */
 public class Estomach extends Stage{
-
-    public Estomach(int x, int y,Container container) {
-        super(x, y, 800,700, container);
-        super.setUrl("src/images/nivel1_Estomago.png");
-        super.setImage(this.getUrl());
-        super.setImage(super.getImage());
-    }
-
-   
-
     
-
+    /**
+     * 
+     * @param x
+     * @param y
+     * @param container 
+     */
+    public Estomach(int x, int y, Container container) {
+        super(x, y, 800,700,container);
+        super.setImage("src/images/1level_Estomach.png");
+    }
+    
+    /**
+     * 
+     * @return 
+     */
     @Override
     public Rectangle getBoundaries() {
-
        return new Rectangle(getX(), getY(), getWidth(), getHeight());
-        
     }
-
-   
-    
-    
-    
-    
+  
 }

@@ -12,7 +12,7 @@ import Containers.Container;
  * @author maria
  */
 public abstract class MovableSprite extends Sprite implements Runnable {
-
+    
     private Thread thread;
     
 
@@ -25,6 +25,7 @@ public abstract class MovableSprite extends Sprite implements Runnable {
         return thread;
     }
     
+    @Override
     public abstract void run();
 
     public void setThread(Thread thread) {

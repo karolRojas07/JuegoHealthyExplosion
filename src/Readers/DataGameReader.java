@@ -13,6 +13,8 @@ import Controlador.Game;
  */
 public interface DataGameReader {
     
+ public void read(String path);
+
     public void read(Game game);
     
     

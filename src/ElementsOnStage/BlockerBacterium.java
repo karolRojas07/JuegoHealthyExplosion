@@ -73,9 +73,7 @@ public class BlockerBacterium extends Bacterium {
                       
                       this.setX(nX);
                       this.setY(nY);
-                      this.setIndicator(true);
-                      System.out.println(this.isIndicator());        
-                              
+                      this.setIndicator(true);  
                 }
                 this.getContainer().refresh();
             }

@@ -12,19 +12,8 @@ import Containers.Container;
  * @author maria
  */
 public abstract class StaticSprite extends Sprite{
-
-    public StaticSprite(int x, int y, int width, int height) {
-        super(x, y, width, height);
-    }
-
-   
+  
     public StaticSprite(int x, int y, int width, int height, Container container) {
         super(x, y, width, height,container);
     }
-
-    
-   
- 
-    
-    
 }

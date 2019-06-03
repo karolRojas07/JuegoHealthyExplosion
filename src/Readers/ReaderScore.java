@@ -14,9 +14,13 @@ import Controlador.Game;
 public class ReaderScore implements DataGameReader {
 
     @Override
+    public void read(String path) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
     public void read(Game game) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
 }

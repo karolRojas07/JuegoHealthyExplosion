@@ -6,13 +6,12 @@
 package Scenarios;
 
 import Containers.Container;
-import ElementsScenarios.Antibiotic;
-import ElementsScenarios.Bacterium;
-import ElementsScenarios.BlockerBacterium;
-import ElementsScenarios.Bomb;
-import ElementsScenarios.Box;
-import ElementsScenarios.Wall;
-import ElementsScenarios.Wood;
+import ElementsOnStage.Antibiotic;
+import ElementsOnStage.Bacterium;
+import ElementsOnStage.BlockerBacterium;
+import ElementsOnStage.Box;
+import ElementsOnStage.Wall;
+import ElementsOnStage.Wood;
 import Spriters.Sprite;
 import Spriters.StaticSprite;
 import java.awt.Color;
@@ -115,21 +114,21 @@ public abstract class Stage extends StaticSprite implements Container{
                 if (tableGame[file][column] == 1)
                         {
                            
-                            box = new Wall(file*42, column*50);
+                            box = new Wall(file*42, column*50,super.getContainer());
                             box.setContainer(this);
                             box.setColor(Color.DARK_GRAY);
                             boxes.add(box);
                         }
                         else if (tableGame[file][column] == 2)
                         {
-                            box = new Wood(file*42, column*50);
+                            box = new Wood(file*42, column*50,super.getContainer());
                             box.setContainer(this);
                             box.setColor(null);
                             boxes.add(box);
                         }
                         else if(tableGame[file][column] == 3)
                         {
-                           antibiotic = new Antibiotic(file*42,column*50);
+                           antibiotic = new Antibiotic(file*42,column*50,super.getContainer());
                          
                            antibiotic.setColor(null);
                            antibiotic.setContainer(this);
@@ -158,7 +157,7 @@ public abstract class Stage extends StaticSprite implements Container{
         // crea bombas
         if(evt.getKeyCode() == KeyEvent.VK_B)
         {
-            antibiotic.createBomb(this.getContainer()); 
+            antibiotic.addBomb(this.getContainer()); 
             antibiotic.getContainer().refresh();
             exploitTime();
             antibiotic.getContainer().refresh();
@@ -194,7 +193,7 @@ public abstract class Stage extends StaticSprite implements Container{
         {
            int nX = bacterium.getX();
            int nY = bacterium.getY();
-           box = new Wood(nX-box.getWidth(),nY);
+           box = new Wood(nX-box.getWidth(),nY,super.getContainer());
            box.setContainer(this);
            boxes.add(box);
            
@@ -273,7 +272,7 @@ public abstract class Stage extends StaticSprite implements Container{
       }
       
       /**
-       * timepo para explotar la bacteria
+       * tiempo para explotar la bacteria
        * @param other 
        */
         public void exploitTimeBacterium(Bacterium bacterium)
@@ -283,14 +282,14 @@ public abstract class Stage extends StaticSprite implements Container{
          this.tableGame[bacterium.getX()/42][bacterium.getY()/50] = 0;
         if(bacterium.isIndicator())
         {
-         task1 = () -> bacteriums.remove(bacterium);
+          task1 = () -> bacteriums.remove(bacterium);
         }
         else
         {
            task1 = () -> bacteriums.remove(bacterium); 
         }
-         service.scheduleAtFixedRate(task1,4,2, TimeUnit.SECONDS);
-//         bacterium.getContainer().refresh();
+         service.scheduleAtFixedRate(task1,3,2, TimeUnit.SECONDS);
+
          
       }
       
@@ -338,8 +337,7 @@ public abstract class Stage extends StaticSprite implements Container{
             
             if(state)
             {
-              exploitTimeBacterium(bacterium);
-                 
+              exploitTimeBacterium(bacterium);     
             }
            
         }   
@@ -354,8 +352,9 @@ public abstract class Stage extends StaticSprite implements Container{
         boolean estado = false;
         for(int i = 0; i < antibiotic.getBombs().size(); i++) {
             
-           antibiotic.setBomb( antibiotic.getBombs().get(i));
-           estado = antibiotic.getBomb().checkCollision(other);
+           //antibiotic.setBomb( antibiotic.getBombs().get(i));
+           
+           estado = antibiotic.getBombs().get(i).checkCollision(other);
            
            if(estado)
            {
@@ -413,26 +412,42 @@ public abstract class Stage extends StaticSprite implements Container{
      */
     public void drawBox(Graphics g) {  
         
-     
-        for(Box b : boxes){
-            if(b instanceof Wall)
-            {
-            b.draw(g);}
-        }   
-               this.draw(g);
-            
-          for(Box b : boxes){
+         try
+        {
+            for(Box b : boxes){
+                if(b instanceof Wall)
+                {
+                b.draw(g);}
+            }
+        }catch(java.util.ConcurrentModificationException e)
+        {
+            System.out.println("excepcion");
+        }
+        this.draw(g);
+        
+        try
+        {
+         for(Box b : boxes){
             if(b instanceof Wood){
             b.draw(g);}
-        }
-         antibiotic.draw(g);
-         
-         if(bacteriums != null){
-            for(Bacterium b : bacteriums){
-            b.draw(g);
-           
-        }
          }
+        }catch(java.util.ConcurrentModificationException e)
+        {
+            System.out.println("excepcion");  
+        }
+          antibiotic.draw(g);
+          
+        try
+        {
+          if(bacteriums != null){
+            for(Bacterium b : bacteriums){
+             b.draw(g);  
+           }
+         }
+        }catch(java.util.ConcurrentModificationException e)
+        {
+            System.out.println("excepcion");
+        }
     }
      
     
