@@ -10,5 +10,9 @@ package Content_Of_Box;
  * @author Maria y Karol
  */
 public class Life extends Prize{
+
+    public Life() {
+        super.setImage("src/Images/ImgLife.png");
+    }
     
 }

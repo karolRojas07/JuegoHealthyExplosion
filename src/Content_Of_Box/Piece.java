@@ -10,7 +10,7 @@ package Content_Of_Box;
  * @author Maria y Karol
  */
 public abstract class Piece extends Content {
-    
+
     
     
 }

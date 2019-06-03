@@ -10,5 +10,9 @@ package Content_Of_Box;
  * @author Maria y Karol
  */
 public class Shield extends Power{
+
+    public Shield() {
+        super.setImage("src/Images/ImgShield.png");
+    }
     
 }

@@ -9,6 +9,10 @@ package Content_Of_Box;
  * decrease the speed of the antibiotic
  * @author Maria y Karol
  */
-public abstract class Weakness  extends Content {
+public class Weakness  extends Content {
+
+    public Weakness() {
+        super.setImage("src/Images/ImgLessSpeed.png");
+    }
     
 }

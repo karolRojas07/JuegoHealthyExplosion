@@ -10,5 +10,9 @@ package Content_Of_Box;
  * @author Maria y Karol
  */
 public class Speed extends Power{
+
+    public Speed() {
+        super.setImage("src/Images/ImgSpeed.png");
+    }
     
 }

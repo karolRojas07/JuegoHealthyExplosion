@@ -10,5 +10,10 @@ package Content_Of_Box;
  * @author Maria y Karol
  */
 public class SuperBomb extends Prize{
+
+    public SuperBomb() {
+        super.setImage("src/Images/ImgSuperBomb.png");
+    }
+    
     
 }

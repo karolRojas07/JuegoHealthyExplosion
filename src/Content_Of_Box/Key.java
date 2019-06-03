@@ -11,4 +11,11 @@ package Content_Of_Box;
  */
 public class Key extends Piece {
     
+    /**
+     * create a new key and set the image
+     */
+    public Key() {
+        super.setImage("src/Images/ImgKey.png");
+    }
+    
 }

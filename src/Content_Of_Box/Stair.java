@@ -10,5 +10,10 @@ package Content_Of_Box;
  * @author Maria y Karol
  */
 public class Stair extends Piece{
+
+    public Stair() {
+        super.setImage("src/Images/ImgStair.png");
+    }
+    
     
 }
