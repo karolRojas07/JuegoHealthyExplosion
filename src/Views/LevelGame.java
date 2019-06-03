@@ -47,7 +47,6 @@ public class LevelGame extends javax.swing.JDialog {
      */
     public void enableFirstLevel()
     {
-        System.out.println("masnasc ");
         btLung.setEnabled(false);
         btHeart.setEnabled(false);
     }
@@ -76,7 +75,6 @@ public class LevelGame extends javax.swing.JDialog {
     public LevelGame(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        state=false;
     }
 
     /**
@@ -91,6 +89,7 @@ public class LevelGame extends javax.swing.JDialog {
         btStomach = new javax.swing.JButton();
         btLung = new javax.swing.JButton();
         btHeart = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         backGround = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -118,6 +117,14 @@ public class LevelGame extends javax.swing.JDialog {
         btHeart.setContentAreaFilled(false);
         getContentPane().add(btHeart, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 40, 60));
 
+        btnBack.setText("BACK");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
+
         backGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LevelGame.jpg"))); // NOI18N
         getContentPane().add(backGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, -1));
 
@@ -136,11 +143,17 @@ public class LevelGame extends javax.swing.JDialog {
        this.dispose();
     }//GEN-LAST:event_btLungActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+      state=false;
+      this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backGround;
     private javax.swing.JButton btHeart;
     private javax.swing.JButton btLung;
     private javax.swing.JButton btStomach;
+    private javax.swing.JButton btnBack;
     // End of variables declaration//GEN-END:variables
 }

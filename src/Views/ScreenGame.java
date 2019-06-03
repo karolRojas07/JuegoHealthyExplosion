@@ -39,21 +39,26 @@ public class ScreenGame extends javax.swing.JFrame {
     }
     private void start(){
         homePage.open();
+        homePageOpen();
+    }
+    private void homePageOpen(){
         if (homePage.isState())
         {
             menuGame.open();
-            if(menuGame.isState())
+            menuGameOpen();
+        }else{
+            System.exit(WIDTH);
+        }
+    }
+    private void menuGameOpen()
+    {
+        if(menuGame.isState())
             {
                 switch(menuGame.getOption())
                 {
                     case 0: // New Game
                         levelGame.open(0);
-                        if(levelGame.isState())
-                        {
-                            nameGame.open();
-                            String name=nameGame.getName();
-                            startLevel(levelGame.getOption());
-                        }
+                        levelGameOpen();
                         break;
                     case 1: //Load Game
                         break;
@@ -65,8 +70,27 @@ public class ScreenGame extends javax.swing.JFrame {
             }else{
                System.exit(WIDTH);
             }
-        }else{
-            System.exit(WIDTH);
+    }
+    private void levelGameOpen()
+    {
+        if(levelGame.isState())
+        {
+            nameGame.open();
+            if(nameGame.isState())
+            {
+            String name=nameGame.getName();
+            startLevel(levelGame.getOption());
+            }
+            else
+            {
+              levelGame.open(0);  
+              levelGameOpen();
+            }
+        }
+        else
+        {
+          menuGame.open();
+          menuGameOpen();
         }
     }
     
