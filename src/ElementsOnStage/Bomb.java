@@ -23,7 +23,7 @@ public class Bomb extends StaticSprite{
      */
     public Bomb(int x, int y,Container container) {
         super(x, y, 42,42,container);
-        super.setImage("src/Images/bomba.png"); 
+        super.setImage("src/Images/ImgBomb.png"); 
     }
     
     /**

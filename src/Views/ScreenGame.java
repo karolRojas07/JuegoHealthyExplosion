@@ -6,6 +6,8 @@
 package Views;
 
 import Controlador.Game;
+import Readers.DataGameReader;
+import Readers.ReaderStage;
 import java.awt.Graphics;
 
 /**
@@ -73,7 +75,10 @@ public class ScreenGame extends javax.swing.JFrame {
         switch(option)
         {
             case 0:  //Estomach
-                
+                DataGameReader reader = new ReaderStage();
+                reader.read(this.game);
+                this.game.setReaderStage(reader);
+                open();
                 break;
             case 1: //Lung
                 
@@ -83,6 +88,11 @@ public class ScreenGame extends javax.swing.JFrame {
                 break;
         }
        
+    }
+    
+    private void open(){
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
     /**
      * Create a new ScreenGame

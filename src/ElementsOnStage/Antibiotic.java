@@ -53,7 +53,8 @@ public class Antibiotic extends StaticSprite{
     @Override
     public void draw(Graphics g) {
         putBomb(g);
-        super.paint(g); }
+        super.paint(g); 
+    }
     
     /**
      *  paint the bombs

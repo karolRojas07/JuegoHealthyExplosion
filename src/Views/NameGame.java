@@ -99,11 +99,11 @@ public class NameGame extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
-     try{
-         name=this.txtNameGame.getText();
-        if(name.equals(" ")| name == null)
+        name=this.txtNameGame.getText();
+        try{
+        if(name.equals("")| name.equals(" "))
         {
-            System.err.println("[NAME_GAME.BTN_START] You mut put a name to the game");
+            System.err.println("[NAME_GAME.BTN_START] You must put a name to the game");
             state=false;
             throw new NameCannotBeEmptyException();
         }

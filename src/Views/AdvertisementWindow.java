@@ -16,8 +16,8 @@ public class AdvertisementWindow extends javax.swing.JDialog {
      */
     public void open()
     {
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
-        this.setLocationRelativeTo(this);
         try {
             Thread.sleep(5000);  // en milisegundos
             } catch(InterruptedException ie) 
