@@ -8,19 +8,27 @@ package Readers;
 import Controlador.Game;
 
 /**
- *
- * @author usuario
+ * Read the score of the player
+ * @author Maria y Karol
  */
 public class ReaderScore implements DataGameReader {
-
+    
+    /**
+     * Read 
+     * @param path 
+     */
     @Override
     public void read(String path) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
-
+    
+    /**
+     * 
+     * @param game 
+     */
     @Override
     public void read(Game game) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
 }

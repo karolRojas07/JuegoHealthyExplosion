@@ -8,13 +8,22 @@ package Readers;
 import Controlador.Game;
 
 /**
- *
- * @author usuario
+ * Read the information data of the game from a JSON file
+ * @author Maria y Karol
  */
 public interface DataGameReader {
     
- public void read(String path);
-
+    
+    /**
+     * Read 
+     * @param path the name of the file
+     */   
+    public void read(String path);
+  
+    /**
+      * Read
+      * @param game the controller of the game
+      */
     public void read(Game game);
     
     
