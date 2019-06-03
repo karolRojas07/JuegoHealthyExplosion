@@ -47,7 +47,7 @@ public class ScreenGame extends javax.swing.JFrame {
                 switch(menuGame.getOption())
                 {
                     case 0: // New Game
-                        levelGame.open();
+                        levelGame.open(0);
                         if(levelGame.isState())
                         {
                             nameGame.open();

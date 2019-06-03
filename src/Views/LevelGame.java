@@ -23,12 +23,51 @@ public class LevelGame extends javax.swing.JDialog {
     }
 
     
-    public void open()
+    public void open(int level)
     {
+        switch(level)
+        {
+            case 0:
+                enableFirstLevel();
+                break;
+            case 1:
+                enableSecondLevel();
+                break;
+            case 2:
+                enableThirdLevel();
+                break;
+        }
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
     
+    
+    /**
+     * 
+     */
+    public void enableFirstLevel()
+    {
+        System.out.println("masnasc ");
+        btLung.setEnabled(false);
+        btHeart.setEnabled(false);
+    }
+    
+    /**
+     * 
+     */
+    public void enableSecondLevel()
+    {
+        btLung.setEnabled(true);
+    }
+    
+    /**
+     * 
+     */
+    public void enableThirdLevel()
+    {
+        btLung.setEnabled(true);
+        btHeart.setEnabled(true);
+    }
     /**
      * Creates new form LevelGame
      * @param parent
@@ -51,6 +90,7 @@ public class LevelGame extends javax.swing.JDialog {
 
         btStomach = new javax.swing.JButton();
         btLung = new javax.swing.JButton();
+        btHeart = new javax.swing.JButton();
         backGround = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -72,7 +112,11 @@ public class LevelGame extends javax.swing.JDialog {
                 btLungActionPerformed(evt);
             }
         });
-        getContentPane().add(btLung, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 50, 90));
+        getContentPane().add(btLung, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 40, 90));
+
+        btHeart.setBorderPainted(false);
+        btHeart.setContentAreaFilled(false);
+        getContentPane().add(btHeart, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 40, 60));
 
         backGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/LevelGame.jpg"))); // NOI18N
         getContentPane().add(backGround, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, -1));
@@ -95,6 +139,7 @@ public class LevelGame extends javax.swing.JDialog {
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backGround;
+    private javax.swing.JButton btHeart;
     private javax.swing.JButton btLung;
     private javax.swing.JButton btStomach;
     // End of variables declaration//GEN-END:variables
