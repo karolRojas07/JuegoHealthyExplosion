@@ -49,7 +49,7 @@ public class MenuGame extends javax.swing.JDialog {
         BtLoadGame = new javax.swing.JButton();
         BTSave = new javax.swing.JButton();
         BTInstructions = new javax.swing.JButton();
-        BTExit = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
         BackGround = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -100,14 +100,14 @@ public class MenuGame extends javax.swing.JDialog {
         });
         getContentPane().add(BTInstructions, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 360, 200, 40));
 
-        BTExit.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        BTExit.setText("EXIT");
-        BTExit.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnBack.setText("BACK");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BTExitActionPerformed(evt);
+                btnBackActionPerformed(evt);
             }
         });
-        getContentPane().add(BTExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 460, 80, 40));
+        getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 460, 80, 40));
 
         BackGround.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         BackGround.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MenuGame.jpg"))); // NOI18N
@@ -126,10 +126,10 @@ public class MenuGame extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_BtLoadGameActionPerformed
 
-    private void BTExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTExitActionPerformed
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         state=false;
         this.dispose();
-    }//GEN-LAST:event_BTExitActionPerformed
+    }//GEN-LAST:event_btnBackActionPerformed
 
     private void BTInstructionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTInstructionsActionPerformed
         option=03;
@@ -143,12 +143,12 @@ public class MenuGame extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BTExit;
     private javax.swing.JButton BTInstructions;
     private javax.swing.JButton BTSave;
     private javax.swing.JLabel BackGround;
     private javax.swing.JButton BtLoadGame;
     private javax.swing.JButton BtNewGame;
+    private javax.swing.JButton btnBack;
     private javax.swing.JLabel jtTitulo;
     // End of variables declaration//GEN-END:variables
 }

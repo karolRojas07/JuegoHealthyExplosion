@@ -6,8 +6,6 @@
 package Views;
 
 import Controlador.Game;
-import Readers.DataGameReader;
-import Readers.ReaderStage;
 import java.awt.Graphics;
 
 /**
@@ -20,6 +18,8 @@ public class ScreenGame extends javax.swing.JFrame {
      private final LevelGame levelGame;
      private final MenuGame menuGame;
      private final NameGame nameGame;
+     
+     
      
      private Game game ;
 
@@ -34,13 +34,14 @@ public class ScreenGame extends javax.swing.JFrame {
     public void startGame(){
         this.setSize(800, 700); 
         this.pack();
-        
         start();
     }
+    
     private void start(){
         homePage.open();
         homePageOpen();
     }
+    
     private void homePageOpen(){
         if (homePage.isState())
         {
@@ -50,6 +51,7 @@ public class ScreenGame extends javax.swing.JFrame {
             System.exit(WIDTH);
         }
     }
+    
     private void menuGameOpen()
     {
         if(menuGame.isState())
@@ -68,9 +70,10 @@ public class ScreenGame extends javax.swing.JFrame {
                         break;
                 }
             }else{
-               System.exit(WIDTH);
+               start();
             }
     }
+    
     private void levelGameOpen()
     {
         if(levelGame.isState())
@@ -99,16 +102,16 @@ public class ScreenGame extends javax.swing.JFrame {
         switch(option)
         {
             case 0:  //Estomach
-                DataGameReader reader = new ReaderStage();
-                reader.read(this.game);
-                this.game.setReaderStage(reader);
+                game.setStage(0);
                 open();
                 break;
             case 1: //Lung
-                
+                game.setStage(1);
+                open();
                 break;
             case 2: //Heart
-                
+                game.setStage(2);
+                open();
                 break;
         }
        
