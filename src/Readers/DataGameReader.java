@@ -5,7 +5,8 @@
  */
 package Readers;
 
-import Controlador.Game;
+import Containers.Container;
+import Stages.Stage;
 
 /**
  * Read the information data of the game from a JSON file
@@ -15,16 +16,12 @@ public interface DataGameReader {
     
     
     /**
-     * Read 
-     * @param path the name of the file
+     * Read the stage
+     * @param file the name of the file to read the stage
+     * @param container where is painted the stage
+     * @return the stage read
      */   
-    public void read(String path);
-  
-    /**
-      * Read
-      * @param game the controller of the game
-      */
-    public void read(Game game);
-    
-    
+    public Stage read(String file,Container container);
+      
 }
+ 

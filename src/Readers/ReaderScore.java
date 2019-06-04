@@ -5,7 +5,8 @@
  */
 package Readers;
 
-import Controlador.Game;
+import Containers.Container;
+import Stages.Stage;
 
 /**
  * Read the score of the player
@@ -14,21 +15,14 @@ import Controlador.Game;
 public class ReaderScore implements DataGameReader {
     
     /**
-     * Read 
-     * @param path 
-     */
+     * Read the stage
+     * @param file the name of the file to read the stage
+     * @param container where is painted the stage
+     * @return the stage read
+     */   
     @Override
-    public void read(String path) {
-        
-    }
-    
-    /**
-     * 
-     * @param game 
-     */
-    @Override
-    public void read(Game game) {
-        
+    public Stage read(String file, Container container) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -5,15 +5,14 @@
  */
 package Readers;
 
-import Controlador.Game;
-import ElementsOnStage.Antibiotic;
-import ElementsOnStage.Box;
-import Scenarios.Estomach;
-import Scenarios.Stage;
+import Containers.Container;
+import Stages.Estomach;
+import Stages.Heart;
+import Stages.Lung;
+import Stages.Stage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.ArrayList;
 
 /**
  * Read the information about any stage
@@ -21,107 +20,72 @@ import java.util.ArrayList;
  */
 public class ReaderStage implements DataGameReader{
 
-    private ArrayList<Box> boxes;
-    private Game game;
+    /**
+     * The Stage 
+     */
     private Stage stage ;
-    private int[][] tableGame;
-
-    public ReaderStage() {
-        boxes = new ArrayList<>();
-        tableGame = new int[19][16];
-    }
     
     /**
-     * Get the list of the boxes in the stage
-     * @return 
+     * To read where to put the wall box
      */
-    public ArrayList<Box> getBoxes() { return boxes; }
-
-
-
+    private final int[][] tableGame;
+    
     /**
-     * 
-     * @param file the name of the file
+     * Create new ReaderStage
      */
+    public ReaderStage() {  tableGame = new int[19][16]; }  
+    
+    /**
+     * Read the stage
+     * @param file the name of the file to read the stage
+     * @param container where is painted the stage
+     * @return the stage read
+     */   
     @Override
-    public void read( String file) {
-        
-        try {
-             RandomAccessFile reader = new RandomAccessFile(file, "r");
-             String line =  null;
-             int column = 0;
-             while ( (line = reader.readLine() ) != null )
-             {
-                 column +=1;
-                 String[] parts = line.split(" ");
-               
-                 if( column == 1)
-                 {
-                     if(parts[0].contains("E"))
-                     {
-                         stage = new Estomach(0,0,game);
-                         game.setStage(stage);
-                     }
-                 }
-                 else if (column < tableGame[0].length)
-                 {
-                    for(int i = 0;  i< parts.length ; i++ )
-                    {  
+    public Stage read(String file, Container container)
+    {
+        try{
+            RandomAccessFile reader = new RandomAccessFile(file, "r");
+            String line =  null;
+            int column = 0;
+            while ( (line = reader.readLine() ) != null )
+            {    
+                column +=1;
+                String[] parts = line.split(" "); 
+                if( column == 1)
+                {
+                    if(parts[0].contains("E"))
+                    {
+                        stage= new Estomach(0,0,container);
+                    }
+                    if(parts[0].contains("L"))
+                    {
+                        stage= new Lung(0,0,container);
+                    }
+                    if(parts[0].contains("H"))
+                    {
+                        stage=new Heart(0,0,container);
+                    }
+                }
+                else if (column < tableGame[0].length)
+                {
+                   for(int i = 0;  i< parts.length ; i++ )
+                   {  
                        tableGame[i][column-2] = Integer.parseInt(parts[i]); 
-                    } 
-                 }   
+                   } 
+                }   
              }
              stage.setTableGame(tableGame);
              stage.fixElements();
              reader.close();
-        } catch (FileNotFoundException ex) { } 
-          catch (IOException ex) {        }     
-    }
-
-    /**
-     * 
-     * @param game 
-     */
-    @Override
-    public void read(Game game) {
-       try {
-            
-             RandomAccessFile reader = new RandomAccessFile("StomachScenario.txt", "r");
-             String line =  null;
-             int column = 0;
-             while ( (line = reader.readLine() ) != null )
-             {
-                 
-                 column +=1;
-                 String[] parts = line.split(" ");
-               
-                 if( column == 1)
-                 {
-                     if(parts[0].contains("E"))
-                     {
-                         stage = new Estomach(0,0,game);
-                         game.setStage(stage);
-                      
-                     }
-                 }
-                 else if (column < tableGame[0].length)
-                 {
-                    for(int file = 0;  file< parts.length ; file++ )
-                    {  
-                       tableGame[file][column-2] = Integer.parseInt(parts[file]); 
-                       
-                    } 
-                 }   
-             }
-              stage.setTableGame(tableGame);
-              stage.fixElements();
-             reader.close();
+              
+              return stage;
+             
             
         } catch (FileNotFoundException ex) { }
           catch (IOException ex) { }
+        
+        return stage;
     }
-    
-    
-    
 }
 
