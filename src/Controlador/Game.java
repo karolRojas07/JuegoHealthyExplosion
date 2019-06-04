@@ -7,7 +7,7 @@ package Controlador;
 
 import Containers.Container;
 import Readers.DataGameReader;
-import Scenarios.Stage;
+import Stages.Stage;
 import Spriters.Sprite;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -19,7 +19,22 @@ import java.awt.event.KeyEvent;
  * @author María y Karol
  */
 public class Game extends Sprite implements Container{
-
+    
+    /**
+     * name of the file where is the information data about the Estomach Stage
+     */
+    private static final String ESTOMACH_FILE="StomachScenario.txt" ;
+   
+    /**
+     * name of the file where is the information data about the Lung Stage
+     */
+    private static final String LUNG_FILE="LungScenario.txt" ;
+    
+    /**
+     * name of the file where is the information data about the Heart Stage
+     */
+    private static final String HEART_FILE="HeartScenario.txt" ;
+    
     /**
      * It is responsible of read the data information about a stage
      */
@@ -37,8 +52,7 @@ public class Game extends Sprite implements Container{
 
      */
     public Game(int x, int y) {
-        super(x, y, 800, 700);
-      
+      super(x, y, 800, 700);
     }
     
     /**
@@ -50,10 +64,23 @@ public class Game extends Sprite implements Container{
     }
     
     /**
-     * Define the stage
+     * Define the stage of the game
      * @param stage Stage where is playing the user
      */
-    public void setStage(Stage stage) { this.stage = stage;  }
+    public void setStage(int stage) { 
+        switch(stage)
+        {
+            case 0:
+                this.stage=readerStage.read(ESTOMACH_FILE,super.getContainer());
+                break;
+            case 1:
+                this.stage=readerStage.read(LUNG_FILE,super.getContainer());
+                break;
+            case 2:
+                this.stage=readerStage.read(HEART_FILE,super.getContainer());
+                break;
+        }
+    }
     
     /**
      * Draw the stage
@@ -71,9 +98,7 @@ public class Game extends Sprite implements Container{
      * @param evt 
      */
      public void keyPressed(KeyEvent evt) { stage.keyPressed(evt); }
-      // path = "StomachScenario.txt"; 
-    //    reader.read(path);
-  // 
+       
      /**
       * Uptdate tshe game in the view
       */
