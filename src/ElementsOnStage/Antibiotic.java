@@ -27,6 +27,11 @@ public class Antibiotic extends StaticSprite{
      * The bombs tha has put the antibiotic
      */
     private ArrayList<Bomb> bombs ;
+    
+    /**
+     * the direction the bomb for put
+     */
+    private int directionBomb;
       
     /**
      * create a new an
@@ -84,6 +89,8 @@ public class Antibiotic extends StaticSprite{
     {
         int currentX=super.getX();
         int currentY=super.getY();
+        directionBomb = direction;
+        
         switch(direction)
         {
             case KeyEvent.VK_UP:
@@ -135,8 +142,40 @@ public class Antibiotic extends StaticSprite{
      */
     public void addBomb(Container container)
     {
-        Bomb bomb = new Bomb(this.getX() ,this.getY()-this.getHeight()+10,container);
-        bombs.add(bomb);
+        Bomb bomb = null;
+       
+        switch(directionBomb)
+        {
+            case KeyEvent.VK_UP:
+            {
+               bomb = new Bomb(this.getX() ,this.getY()-this.getHeight()+10,container);
+                
+            break;
+            }
+            case KeyEvent.VK_DOWN:
+            {
+               bomb = new Bomb(this.getX() ,this.getY()+this.getHeight()-10,container);
+            break;
+            }
+            case KeyEvent.VK_LEFT:
+            {
+                bomb = new Bomb(this.getX()-this.getWidth()+10 ,this.getY(),container);
+            break;
+            }
+
+            case KeyEvent.VK_RIGHT:
+            {
+               bomb = new Bomb(this.getX()+this.getWidth()-10 ,this.getY(),container);
+                
+            break;
+            }
+            default:
+            {
+                System.err.println("[ANTIBIOTIC.MOVE] Invalid Direction: ");
+            break;
+            }
+        }
+         bombs.add(bomb);
     }
     
     /**

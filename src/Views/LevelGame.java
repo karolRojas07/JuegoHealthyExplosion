@@ -47,8 +47,8 @@ public class LevelGame extends javax.swing.JDialog {
      */
     public void enableFirstLevel()
     {
-        btLung.setEnabled(false);
-        btHeart.setEnabled(false);
+        btLung.setEnabled(true);
+        btHeart.setEnabled(true);
     }
     
     /**
@@ -115,6 +115,11 @@ public class LevelGame extends javax.swing.JDialog {
 
         btHeart.setBorderPainted(false);
         btHeart.setContentAreaFilled(false);
+        btHeart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btHeartActionPerformed(evt);
+            }
+        });
         getContentPane().add(btHeart, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 40, 60));
 
         btnBack.setText("BACK");
@@ -147,6 +152,12 @@ public class LevelGame extends javax.swing.JDialog {
       state=false;
       this.dispose();
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btHeartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHeartActionPerformed
+       option=2;
+       state=true;
+       this.dispose();
+    }//GEN-LAST:event_btHeartActionPerformed
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

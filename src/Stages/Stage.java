@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Scenarios;
+package Stages;
 
 import Containers.Container;
 import ElementsOnStage.Antibiotic;
 import ElementsOnStage.Bacterium;
 import ElementsOnStage.BlockerBacterium;
 import ElementsOnStage.Box;
+import ElementsOnStage.Metal;
 import ElementsOnStage.Wall;
 import ElementsOnStage.Wood;
 import Spriters.Sprite;
@@ -133,6 +134,13 @@ public abstract class Stage extends StaticSprite implements Container{
                            antibiotic.setColor(null);
                            antibiotic.setContainer(this);
                            
+                        }
+                        else if(tableGame[file][column] == 4)
+                        {
+                            box = new Metal(file*42, column*50,super.getContainer());
+                            box.setContainer(this);
+                            box.setColor(null);
+                            boxes.add(box);
                         }
                    
                 
@@ -412,7 +420,7 @@ public abstract class Stage extends StaticSprite implements Container{
      */
     public void drawBox(Graphics g) {  
         
-         try
+          try
         {
             for(Box b : boxes){
                 if(b instanceof Wall)
@@ -424,12 +432,16 @@ public abstract class Stage extends StaticSprite implements Container{
             System.out.println("excepcion");
         }
         this.draw(g);
-        
+       
         try
         {
          for(Box b : boxes){
             if(b instanceof Wood){
-            b.draw(g);}
+            b.draw(g);
+            }else if (b instanceof Metal)
+            {
+               b.draw(g);
+            }
          }
         }catch(java.util.ConcurrentModificationException e)
         {

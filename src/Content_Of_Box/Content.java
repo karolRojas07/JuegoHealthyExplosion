@@ -25,4 +25,9 @@ public abstract class Content {
             System.err.println("[CONTENT.SET_IMAGE] No se puede leer la imagen");
         }
     }
+
+    public BufferedImage getImage() {
+        return image;
+    }
+    
 }

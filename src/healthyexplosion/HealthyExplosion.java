@@ -6,6 +6,8 @@
 package healthyexplosion;
 
 import Controlador.Game;
+import Readers.DataGameReader;
+import Readers.ReaderStage;
 import Views.ScreenGame;
 
 /**
@@ -20,7 +22,9 @@ public class HealthyExplosion {
     public static void main(String[] args) {
 
         Game gameWorld= new Game(0, 0);
+        DataGameReader readerStage= new ReaderStage();
         
+        gameWorld.setReaderStage(readerStage);
         ScreenGame screenGame= new ScreenGame(gameWorld);
         
         screenGame.startGame();

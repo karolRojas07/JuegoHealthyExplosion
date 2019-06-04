@@ -65,6 +65,11 @@ public class ReaderStage implements DataGameReader{
                     if(parts[0].contains("H"))
                     {
                         stage=new Heart(0,0,container);
+                        System.out.println(" se pone ");
+                    }
+                    else
+                    {
+                        System.out.println("no se pone ");
                     }
                 }
                 else if (column < tableGame[0].length)

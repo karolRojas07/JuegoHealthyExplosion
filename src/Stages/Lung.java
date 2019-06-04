@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Scenarios;
+package Stages;
 
 import Containers.Container;
 import java.awt.Rectangle;
@@ -13,14 +13,25 @@ import java.awt.Rectangle;
  * @author usuario
  */
 public class Lung extends Stage{
-
-    public Lung(int x, int y, int width, int height, Container container) {
-        super(x, y, 512, 512, container);
+    
+    /**
+     * 
+     * @param x
+     * @param y
+     * @param container 
+     */
+    public Lung(int x, int y, Container container) {
+        super(x, y, 800,700, container);
+        super.setImage("src/images/2level_Lung.png");
     }
-
+    
+    /**
+     * 
+     * @return 
+     */
     @Override
     public Rectangle getBoundaries() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
     
     
