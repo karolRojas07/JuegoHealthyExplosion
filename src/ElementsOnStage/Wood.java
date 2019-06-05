@@ -21,7 +21,7 @@ public class Wood extends Box{
      * @param container where is located the box
      */
     public Wood(int x, int y, Container container) {
-        super(x, y, 42, 50,container);
+        super(50,x, y, 42, 50,container);
         super.setImage("src/Images/ImgWoodBox.jpg");
         super.setResistance(1);
     }

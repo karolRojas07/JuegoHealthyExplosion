@@ -21,7 +21,9 @@ public class Wall extends Box{
      * @param container where is located the wall box
      */
     public Wall(int x, int y, Container container) {
-        super(x, y, 42, 48,container);
+    super(0,x, y, 42, 48,container);
+    super.setResistance(0);
+       
     }
 
     /**

@@ -56,16 +56,18 @@ public class ReaderStage implements DataGameReader{
                 {
                     if(parts[0].contains("E"))
                     {
-                        stage= new Estomach(0,0,container);
+                        stage= new Estomach(0,10000,0,0,container);
+                        stage.setLife(100);
                     }
                     if(parts[0].contains("L"))
                     {
-                        stage= new Lung(0,0,container);
+                        stage= new Lung(0,15000,0,0,container);
+                          stage.setLife(100);
                     }
                     if(parts[0].contains("H"))
                     {
-                        stage=new Heart(0,0,container);
-                        System.out.println(" se pone ");
+                        stage=new Heart(0,25000,0,0,container);
+                        stage.setLife(100);
                     }
                     else
                     {

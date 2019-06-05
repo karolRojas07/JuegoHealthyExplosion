@@ -14,7 +14,14 @@ import Spriters.StaticSprite;
  */
 public abstract class Box extends StaticSprite{
     
+    /**
+     * 
+     */
     private int resistance;
+    /**
+     * valor de puntaje de la caja
+     */
+    private int valueScore;
     /**
      * Create a new box
      * @param x position in the x axis
@@ -23,13 +30,39 @@ public abstract class Box extends StaticSprite{
      * @param height height of the box
      * @param container where is located the box
      */
-    public Box(int x, int y, int width, int height, Container container) {
-        super(x, y, width, height, container);
-    }
+    
 
+    public Box(int valueScore, int x, int y, int width, int height, Container container) {
+        super(x, y, width, height, container);
+        this.valueScore = valueScore;
+        
+    }
+    
+    public void deleteResistance()
+    {
+         resistance-=1;
+    }
     public void setResistance(int resistance) {
         this.resistance = resistance;
     }
+
+    public int getValueScore() {
+        return valueScore;
+    }
+
+    public int getResistance() {
+        return resistance;
+    }
+
+    public void setValueScore(int valueScore) {
+        this.valueScore = valueScore;
+    }
+
+    
+
+    
+    
+    
     
     
 }

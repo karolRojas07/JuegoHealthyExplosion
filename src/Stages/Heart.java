@@ -14,9 +14,9 @@ import java.awt.Rectangle;
  */
 public class Heart extends Stage{
 
-    public Heart(int x, int y, Container container) {
+    public Heart(int stateStage,int scoreEnd,int x, int y, Container container) {
         
-        super(x, y,800,700, container);
+        super(stateStage,scoreEnd,x, y,800,700, container);
         super.setImage("src/images/3level_Heart.png");
     }
 

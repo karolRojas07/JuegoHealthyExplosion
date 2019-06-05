@@ -43,6 +43,11 @@ public abstract class Bacterium extends MovableSprite{
     private static boolean indicator = false;
     
     /**
+     * value of the score of the bacterium
+     */
+    private int valueScore;
+    
+    /**
      * 
      * @return 
      */
@@ -117,10 +122,11 @@ public abstract class Bacterium extends MovableSprite{
      * @param finalX  position in the x axis where the bacterium finish its work
      * @param finalY  position in the y axis where the bacterium finish its work
      */
-    public Bacterium(int x, int y, int width, int height,Container container,int finalX, int finalY) {
+    public Bacterium(int valueScore,int x, int y, int width, int height,Container container,int finalX, int finalY) {
         super(x, y, width, height,container);
         this.finalX = finalX;
         this.finalY = finalY;
+        this.valueScore = valueScore;
         boxes = new ArrayList<>();
     }
     
@@ -148,5 +154,11 @@ public abstract class Bacterium extends MovableSprite{
      }
      return box;
     }
+
+    public int getValueScore() {
+        return valueScore;
+    }
+    
+    
     
 }

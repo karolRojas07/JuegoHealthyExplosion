@@ -20,8 +20,8 @@ public class Lung extends Stage{
      * @param y
      * @param container 
      */
-    public Lung(int x, int y, Container container) {
-        super(x, y, 800,700, container);
+    public Lung(int stateStage,int scoreEnd,int x, int y, Container container) {
+        super(stateStage,scoreEnd,x, y, 800,700, container);
         super.setImage("src/images/2level_Lung.png");
     }
     

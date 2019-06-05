@@ -26,7 +26,6 @@ public class HealthyExplosion {
         
         gameWorld.setReaderStage(readerStage);
         ScreenGame screenGame= new ScreenGame(gameWorld);
-        
         screenGame.startGame();
     }
     

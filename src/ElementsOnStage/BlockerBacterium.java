@@ -26,9 +26,8 @@ public class BlockerBacterium extends Bacterium {
     * @param finalY  position in the y axis where the blocker bacterium finish its work
     */
     public BlockerBacterium(int x, int y, Container container,int finalX, int finalY) {
-        super(x, y,51,50, container,finalX,finalY);
+        super(100,x, y,51,50, container,finalX,finalY);
         super.setImage("src/Images/blockerBacterium.png");
-        
         super.getThread().start();
     }
     

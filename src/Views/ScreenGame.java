@@ -6,7 +6,9 @@
 package Views;
 
 import Controlador.Game;
+import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.JLabel;
 
 /**
  *
@@ -18,17 +20,23 @@ public class ScreenGame extends javax.swing.JFrame {
      private final LevelGame levelGame;
      private final MenuGame menuGame;
      private final NameGame nameGame;
-     
-     
+     private final MessageStateGame messageStateGame;
+     private final Instruction instruction;
      
      private Game game ;
-
+    
+    
+             
+     
 
      
      @Override
     public void paint(Graphics g)
     {
+          
         game.draw(g);
+        
+      
     }
 
     public void startGame(){
@@ -38,8 +46,10 @@ public class ScreenGame extends javax.swing.JFrame {
     }
     
     private void start(){
+        game.playIntro();
         homePage.open();
         homePageOpen();
+       
     }
     
     private void homePageOpen(){
@@ -49,6 +59,7 @@ public class ScreenGame extends javax.swing.JFrame {
             menuGameOpen();
         }else{
             System.exit(WIDTH);
+            game.playEndIntro();
         }
     }
     
@@ -67,7 +78,10 @@ public class ScreenGame extends javax.swing.JFrame {
                     case 2: //Save Game
                         break;
                     case 3: // Instructions
-                        break;
+                        instruction.open();
+                        menuGame.open();
+                        menuGameOpen();
+                    break;
                 }
             }else{
                start();
@@ -82,12 +96,17 @@ public class ScreenGame extends javax.swing.JFrame {
             if(nameGame.isState())
             {
             String name=nameGame.getName();
+            game.setNameGame(name);
+             this.
+              
             startLevel(levelGame.getOption());
+            
             }
             else
             {
               levelGame.open(0);  
               levelGameOpen();
+              
             }
         }
         else
@@ -97,19 +116,48 @@ public class ScreenGame extends javax.swing.JFrame {
         }
     }
     
+        /**
+     * 
+     */
+    private void checkStateGame()
+    {
+        int stateStage = game.checkStateStage();
+        System.out.println("entre");
+        if(stateStage == 1)
+        {
+            messageStateGame.writeMessage("Has Ganado,continue con el siguiente nivel");
+            messageStateGame.setStateMessage(true);
+            messageStateGame.open();
+            if(messageStateGame.isStateMessage()== false)
+            {
+                levelGame.open(1);
+                levelGameOpen();
+            }
+        }
+        else if (stateStage == 2)
+        {
+            messageStateGame.writeMessage("Has Perdido");
+            messageStateGame.open();
+        }
+    }
+    
     private void startLevel(int option)
     {
+        game.playEndIntro();
         switch(option)
         {
             case 0:  //Estomach
                 game.setStage(0);
                 open();
+                 
                 break;
             case 1: //Lung
                 game.setStage(1);
+                
                 open();
                 break;
             case 2: //Heart
+                game.playHeart();
                 game.setStage(2);
                 open();
                 break;
@@ -120,6 +168,7 @@ public class ScreenGame extends javax.swing.JFrame {
     private void open(){
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        
     }
     /**
      * Create a new ScreenGame
@@ -131,7 +180,11 @@ public class ScreenGame extends javax.swing.JFrame {
         levelGame=new LevelGame(null,true);
         menuGame= new MenuGame(null, true);
         nameGame= new NameGame(null, true);
+        messageStateGame = new MessageStateGame(null,true);
+        instruction= new Instruction(null, true);
+      
         initComponents();
+
     }
 
     /**
@@ -182,7 +235,7 @@ public class ScreenGame extends javax.swing.JFrame {
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
 
-
+       checkStateGame();
         game.keyPressed(evt);     
 // TODO add your handling code here:
     }//GEN-LAST:event_formKeyPressed

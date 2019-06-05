@@ -6,7 +6,10 @@
 package ElementsOnStage;
 
 import Containers.Container;
+import Spriters.Sprite;
 import java.awt.Graphics;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * An enemy of the antibiotic who steals the pieces of the antibiotic
@@ -23,34 +26,88 @@ public class ThiefBacterium extends Bacterium{
     * @param ySide heigth of the blocker bacterium
      */
     public ThiefBacterium(int x, int y, Container container, int xSide, int ySide) {
-        super(x, y, 51,50, container, xSide, ySide);
+        super(150,x, y, 51,50, container, xSide, ySide);
         super.setImage("src/Images/ThiefBacterium.png");
         
     }
      
     /**
-     * Paint the Thief bacterium
+    * The movement of the blocker bacterium
+    */
+    @Override
+    public void move()
+    {
+        
+        int nX = this.getX();
+        int nY = this.getY();
+        int step = 5;
+        
+         for(int fila = 0; fila < step; fila++)
+            {
+               Sprite sprite = this.checkLimitsSprite();
+                 
+               if(this.checkCollision(sprite) |  this.getFinalY()< nX)
+               {
+                   this.setX(nX-step);
+                   
+               }
+               else if(this.checkCollision(sprite) &  this.getFinalY()< nY)
+               {
+                   this.setX(nX+step);
+                  
+               }
+               else
+               {
+                     this.setX(nX+step);
+               }
+              
+               
+                 if(this.isOutOfGameSection())
+                {
+                    this.setX(nX);
+                    this.setY(nY);
+                }
+                if(this.checkCollision(sprite))
+                {
+                      
+                      this.setX(nX);
+                      this.setY(nY);
+                      this.setIndicator(true);  
+                }
+                this.getContainer().refresh();
+            }
+         
+    }
+    
+    /**
+    * Start the thread to make the s blocker baterium move by its own
+    */
+    @Override
+    public void run() {
+         while(true)
+        {
+            try {
+                Thread.sleep(200);
+                move();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Bacterium.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
+        }
+        
+    }
+    
+   
+
+    /**
+     * Paint the blocker bacterium
      * @param g 
      */
     @Override
     public void draw(Graphics g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        super.paint(g);
     }
     
-    /**
-     * The movement of the Thief Bacterium
-     */
-    @Override
-    public void move() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    /**
-    * Start the thread to make the Thief baterium move by its own
-    */
-    @Override
-    public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

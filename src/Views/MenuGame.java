@@ -18,6 +18,8 @@ public class MenuGame extends javax.swing.JDialog {
     {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        state=true;
+        
     }
 
     public boolean isState() { return state; }

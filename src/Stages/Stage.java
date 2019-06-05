@@ -5,12 +5,14 @@
  */
 package Stages;
 
+import AudioPlayer.MusicPlayer;
 import Containers.Container;
 import ElementsOnStage.Antibiotic;
 import ElementsOnStage.Bacterium;
 import ElementsOnStage.BlockerBacterium;
 import ElementsOnStage.Box;
 import ElementsOnStage.Metal;
+import ElementsOnStage.ThiefBacterium;
 import ElementsOnStage.Wall;
 import ElementsOnStage.Wood;
 import Spriters.Sprite;
@@ -61,22 +63,51 @@ public abstract class Stage extends StaticSprite implements Container{
     private ArrayList<Bacterium> bacteriums ;
 
     /**
+     * Score of gamer
+     */
+    private int score = 0 ;
+   
+    /**
+     * 
+     */
+    private int life;
+    
+    /**
+     * el puntaje para ganar
+     */
+    private int scoreEnd;
+    
+    /**
+     *  music player
+     */
+    private MusicPlayer musicPlayer;
+    
+    /**
+     * 
+     */
+    private int stateStage = 0 ;
+    /**
      * constructor de la clase stage
      * @param x
      * @param y
      * @param width
      * @param height
      * @param container 
+     * @param scoreEnd 
      */
-    public Stage(int x, int y, int width, int height, Container container) {
+    public Stage(int stateStage,int scoreEnd,int x, int y, int width, int height, Container container) {
         super(x, y, width, height, container);
-        
+        score = 0;
+        this.scoreEnd = scoreEnd;
+        this.stateStage =  stateStage ;
         boxes = new ArrayList<>();
         bacteriums = new ArrayList<>();
-       
+        musicPlayer = new MusicPlayer();
+        
     }
     
     
+
     /**
      * guarda el tablero del juego como atributo
      * @param tableGame 
@@ -165,11 +196,13 @@ public abstract class Stage extends StaticSprite implements Container{
         // crea bombas
         if(evt.getKeyCode() == KeyEvent.VK_B)
         {
+             musicPlayer.playThrowBombAudio();
             antibiotic.addBomb(this.getContainer()); 
             antibiotic.getContainer().refresh();
             exploitTime();
             antibiotic.getContainer().refresh();
-           
+                      
+
              
         }
     
@@ -181,11 +214,10 @@ public abstract class Stage extends StaticSprite implements Container{
            evt.getKeyCode() == KeyEvent.VK_LEFT  ||
            evt.getKeyCode() == KeyEvent.VK_RIGHT)
         {
-          
+            musicPlayer.playWalkAudio();
             Sprite other=  checkLimitsBox() ;
             checkLimitsBacterium();
             antibiotic.move(evt.getKeyCode(),other);
-//          
             
         }
     }
@@ -216,7 +248,7 @@ public abstract class Stage extends StaticSprite implements Container{
         ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
         Runnable task1 = null;
         task1 = () -> this.addBoxBacterium();
-        service.scheduleAtFixedRate(task1,6,5, TimeUnit.SECONDS); 
+        service.scheduleAtFixedRate(task1,2,1, TimeUnit.SECONDS); 
     //scheduleWithFixedDelay es aconsejable usarlo cuando no importa que se siga un patron de tiempo, distinto a scheduleFixedRate que se ejecuta cronologicamente siempre
     }
       
@@ -228,19 +260,33 @@ public abstract class Stage extends StaticSprite implements Container{
         ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
         Runnable task1 = null;
         task1 = () -> creatBacterium();
-        service.scheduleAtFixedRate(task1,20,10, TimeUnit.SECONDS);
-      
-       
+          service.scheduleAtFixedRate(task1,6,5, TimeUnit.SECONDS); 
     //scheduleWithFixedDelay es aconsejable usarlo cuando no importa que se siga un patron de tiempo, distinto a scheduleFixedRate que se ejecuta cronologicamente siempre
    }
     /**
-     *  crea la bacteria, teniendo en cuenta la posicion incial y el lugar donde se dirige Aleatoriamente
+     *  crea la bacteria blocqueadora, teniendo en cuenta la posicion incial y el lugar donde se dirige Aleatoriamente
      */
     private void creatBacterium()
     {
           int[] positionEnd= chooseRandomPositionBacterium();
           int[] positionInit = chooseRandomPositionBacterium(); 
           bacterium = new BlockerBacterium(positionInit[0],positionInit[1],this,positionEnd[0],positionEnd[1]);
+          bacteriums.add(bacterium);
+          bacterium.setSprite(antibiotic);
+          bacterium.setBoxes(boxes);  
+           bacteriums.add(bacterium);
+          this.addBoxBacteriumTime();
+
+
+    }
+     /**
+     *  crea la bacteria, teniendo en cuenta la posicion incial y el lugar donde se dirige Aleatoriamente
+     */
+    private void creatBacteriumThief()
+    {
+          int[] positionEnd= chooseRandomPositionBacterium();
+          int[] positionInit = chooseRandomPositionBacterium(); 
+          bacterium = new ThiefBacterium(positionInit[0],positionInit[1],this,positionEnd[0],positionEnd[1]);
           bacteriums.add(bacterium);
           bacterium.setSprite(antibiotic);
           bacterium.setBoxes(boxes);  
@@ -258,30 +304,44 @@ public abstract class Stage extends StaticSprite implements Container{
         ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
         Runnable task1 = null;
         task1 = () -> antibiotic.deleteBomb();
-        service.scheduleAtFixedRate(task1,5,1, TimeUnit.SECONDS);
+        musicPlayer.playBombExplosionAudio();
+        service.scheduleAtFixedRate(task1,2,1, TimeUnit.SECONDS);
             
        //scheduleWithFixedDelay es aconsejable usarlo cuando no importa que se siga un patron de tiempo, distinto a scheduleFixedRate que se ejecuta cronologicamente siempre
       }
       
       /**
        * El tiempo para explotar la caja
-       * @param other 
+       * @param other  un sprite
        */
       public void exploitTimeBox(Sprite other)
       {
          ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
          Runnable task1 = null;
          this.tableGame[other.getX()/42][other.getY()/50] = 0;
-         task1 = () -> boxes.remove(other);
-         bacterium.setBoxes(boxes);
-         service.scheduleAtFixedRate(task1,4,1, TimeUnit.SECONDS);
-         other.getContainer().refresh();
+         this.getValueScoreTotal();
+        
          
+         
+            task1 = () -> boxes.remove(other);
+         
+            bacterium.setBoxes(boxes);
+            service.scheduleAtFixedRate(task1,2,1, TimeUnit.SECONDS);
+            other.getContainer().refresh();
+         
+         
+      }
+      /**
+       * 
+       */
+      private void getValueScoreTotal()
+      {
+          score+=box.getValueScore();
       }
       
       /**
        * tiempo para explotar la bacteria
-       * @param other 
+       * @param Bacterium la bacteria a la cual se elimina
        */
         public void exploitTimeBacterium(Bacterium bacterium)
       {
@@ -291,14 +351,18 @@ public abstract class Stage extends StaticSprite implements Container{
         if(bacterium.isIndicator())
         {
           task1 = () -> bacteriums.remove(bacterium);
+          getValueScoreTotal();
         }
         else
         {
-           task1 = () -> bacteriums.remove(bacterium); 
+           task1 = () -> bacteriums.remove(bacterium);
+           getValueScoreTotal();
+            
         }
-         service.scheduleAtFixedRate(task1,3,2, TimeUnit.SECONDS);
-
+        
          
+         service.scheduleAtFixedRate(task1,3,2, TimeUnit.SECONDS);
+        
       }
       
      /**
@@ -317,19 +381,34 @@ public abstract class Stage extends StaticSprite implements Container{
             if(controlAntibiotic) {
                 
                   return box;
+                
             }
             else if( controlBacterium ) {
                 
+                  musicPlayer.playAntibioticAudio();
+                  life= life-1;
+                  score-=bacterium.getValueScore();
                   return bacterium;
             }
-            if(state)
+            if(state  )
             {
-              tableGame[box.getX()/42][box.getY()/50]=0;
-              exploitTimeBox(box);     
+                 
+                System.out.println("box "+box.getResistance());
+               
+                  tableGame[box.getX()/42][box.getY()/50]=0;
+                  exploitTimeBox(box);
+                  
+               
+            
             }
-           
+            else
+            {
+                box.deleteResistance();
+            }
+             
         }
-       
+                
+      
         return box;
       
     }  
@@ -345,10 +424,13 @@ public abstract class Stage extends StaticSprite implements Container{
             
             if(state)
             {
-              exploitTimeBacterium(bacterium);     
+              musicPlayer.playBlockerBacteriumAudio();
+              exploitTimeBacterium(bacterium); 
+               
             }
+         
+        }  
            
-        }   
     }  
     
     /**
@@ -363,12 +445,10 @@ public abstract class Stage extends StaticSprite implements Container{
            //antibiotic.setBomb( antibiotic.getBombs().get(i));
            
            estado = antibiotic.getBombs().get(i).checkCollision(other);
+            System.out.println("box "+box.getResistance());
+            
+           return estado;
            
-           if(estado)
-           {
-               return estado;
-           }
-          
         }
         return estado; 
     }  
@@ -456,11 +536,69 @@ public abstract class Stage extends StaticSprite implements Container{
              b.draw(g);  
            }
          }
+          
         }catch(java.util.ConcurrentModificationException e)
         {
             System.out.println("excepcion");
         }
-    }
      
+        
+    }
+    
+   /**
+    * 
+    * @return 
+    */
+    
+    public int checkStateStage(){
+    
+      
+        if( score >= scoreEnd)
+        {
+            System.out.println("score "+score+" life "+life);
+            System.out.println(scoreEnd);
+           stateStage = 1;
+           return 1;
+              
+        }
+        else if (life <= 0)
+        {
+            stateStage = 2;
+            return 2;
+        }
+        return 0;
+    
+    }
+           
+
+    
+    /**
+     * 
+     * @return 
+     */
+    public int getScore() {
+        return score;
+    }
+   
+    
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public int getScoreEnd() {
+        return scoreEnd;
+    }
+
+    
+    public int getStateStage() {
+        return stateStage;
+    }
+    
+ 
     
 }

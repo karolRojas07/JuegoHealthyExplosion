@@ -6,6 +6,7 @@
 package Views;
 
 import Exception.NameCannotBeEmptyException;
+import javax.swing.JLabel;
 
 /**
  *

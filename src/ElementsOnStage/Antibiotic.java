@@ -32,6 +32,7 @@ public class Antibiotic extends StaticSprite{
      * the direction the bomb for put
      */
     private int directionBomb;
+    
       
     /**
      * create a new an
@@ -187,4 +188,8 @@ public class Antibiotic extends StaticSprite{
             bombs.remove(bomb);
     });
     }    
+
+  
+    
+    
 }

@@ -5,14 +5,17 @@
  */
 package Controlador;
 
+import AudioPlayer.MusicPlayer;
 import Containers.Container;
 import Readers.DataGameReader;
 import Stages.Stage;
 import Spriters.Sprite;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import javax.swing.JLabel;
 
 /**
  * The controller of the game
@@ -46,6 +49,24 @@ public class Game extends Sprite implements Container{
     private Stage stage;
    
     /**
+     * name of game that entrance of gamer
+     */
+    private String nameGame;
+    
+    /**
+     * score of gamer that get  exploit a box or bacterium
+     */
+    private int score;
+    /**
+     * life of the game
+     */
+    private int life ;
+    
+    private MusicPlayer mp= new MusicPlayer();
+   
+    
+     JLabel jlName = new JLabel();
+    /**
      * Create a new game
      * @param x position in the x axis of the game
      * @param y position in the x axis of the game
@@ -53,6 +74,7 @@ public class Game extends Sprite implements Container{
      */
     public Game(int x, int y) {
       super(x, y, 800, 700);
+     
     }
     
     /**
@@ -62,6 +84,8 @@ public class Game extends Sprite implements Container{
     public void setReaderStage(DataGameReader readerStage) {
         this.readerStage = readerStage;
     }
+    
+   
     
     /**
      * Define the stage of the game
@@ -91,6 +115,63 @@ public class Game extends Sprite implements Container{
         g.setColor(Color.DARK_GRAY);
         g.fillRect(super.getX(), super.getY(), super.getWidth(), super.getHeight());
         stage.drawBox(g);
+        showNameGame(g);
+        showScore(g);
+        showLife(g);
+       
+    }
+     /**
+     * revisar el estado del escenario si perdio o gano
+     */
+    
+    public int checkStateStage()
+    {
+       System.out.println("states Stages "+stage.getStateStage());
+      
+       return stage.checkStateStage();
+    }
+    /**
+     * muestra el nombre de la partida en el escenario
+     * @param g 
+     */
+    private void showNameGame(Graphics g)
+    {
+            jlName.setForeground(Color.white);
+            jlName.setBounds(50,5, 300, 50);
+            Font auxFont=jlName.getFont(); 
+            jlName.setFont(new Font(auxFont.getFontName(), auxFont.getStyle(), 15));
+            jlName.setText("Name Of Game : "+nameGame);
+            this.jlName.paint(g);
+    }
+    /**
+     * 
+     * @param g 
+     */
+     private void showScore(Graphics g)
+    {
+            
+           
+            score = stage.getScore();
+            jlName.setForeground(Color.white);
+            jlName.setBounds(200,25, 200, 100);
+            Font auxFont=jlName.getFont(); 
+            jlName.setFont(new Font(auxFont.getFontName(), auxFont.getStyle(), 15));
+            jlName.setText("Score        : "+score);
+            this.jlName.paint(g);
+    }
+        /**
+     * 
+     * @param g 
+     */
+     private void showLife(Graphics g)
+    {
+            life = stage.getLife();
+            jlName.setForeground(Color.white);
+            jlName.setBounds(200,25, 200, 150);
+            Font auxFont=jlName.getFont(); 
+            jlName.setFont(new Font(auxFont.getFontName(), auxFont.getStyle(), 15));
+            jlName.setText("life        : "+life);
+            this.jlName.paint(g);
     }
 
     /**
@@ -112,5 +193,33 @@ public class Game extends Sprite implements Container{
     @Override
     public Rectangle getBoundaries() {
         return new Rectangle(super.getX(), super.getY(), super.getWidth(), super.getHeight());
+    }
+
+    /**
+     * set the name of the game 
+     * @param nameGame 
+     */
+    public void setNameGame(String nameGame) {
+        this.nameGame = nameGame;
+    }
+
+    public void playIntro()
+    {
+        mp.playIntroAudio();
+        
+    }    
+    public void playEndIntro()
+    {
+        mp.playIntroEndAudio();
+    }
+    
+    public void playHeart()
+    {
+        mp.playHeartAudio1();
+    }
+    
+    public void stopHeart()
+    {
+        mp.stopHeartAudio1();
     }
 }

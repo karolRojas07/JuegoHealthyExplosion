@@ -20,8 +20,8 @@ public class Estomach extends Stage{
      * @param y
      * @param container 
      */
-    public Estomach(int x, int y, Container container) {
-        super(x, y, 800,700,container);
+    public Estomach(int stateStage,int scoreEnd,int x, int y, Container container) {
+        super(stateStage,scoreEnd,x, y, 800,700,container);
         super.setImage("src/images/1level_Estomach.png");
     }
     
